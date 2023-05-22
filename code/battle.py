@@ -60,11 +60,11 @@ def battle(unit1, unit2):
         if unit1.initiative_position < unit2.initiative_position:
             fight(unit1, unit2)
             if unit2.quantity != 0: fight(unit2, unit1)
-            unit1.initiative_position += 1/unit1.initiative_position
+            unit1.initiative_position += 1/unit1.initiative
         else:
             fight(unit2, unit1)
             if unit1.quantity != 0: fight(unit1, unit2)
-            unit1.initiative_position += 1 / unit1.initiative_position
+            unit1.initiative_position += 1 / unit1.initiative
         if unit1.quantity == 0:
             print(f"{unit1.name} повержен. Осталось {unit2.quantity} "
                   f"{unit2.name}")
