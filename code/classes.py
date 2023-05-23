@@ -18,7 +18,8 @@ class Unit:
         self.quantity = quantity
         self.initiative = initiative
         self.speed = speed
-        self.initiative_position = 0
+        self.initiative_position = 1/initiative
+        self.counterattack_token = 1
 
     def take_damage(self, attack, damage, name, quantity):
         amount_of_damage = round(
@@ -47,3 +48,12 @@ class Unit:
             "attack": self.attack,
             "damage": damage
         }
+
+    def start_turn(self):
+        self.counterattack_token = 1
+
+    def end_turn(self):
+        pass
+
+    def lose_counterattack_token(self):
+        self.counterattack_token -= 1
