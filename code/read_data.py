@@ -23,20 +23,20 @@ def get_units_tuple(name1, name2, quantity1, quantity2):
 
             "taxpayer": "Налогоплательщик",
 
-            "week_in_melee": "Штраф в ближнем бою",
             "close_range_shot": "Точный выстрел",
             "accuracy": "Стрельба без штрафа",
             "double_shot": "Двойной выстрел",
             "piercing_shot": "Пробивающий выстрел",
+            "range_bash": "Оглушающий выстрел",
 
-            "bash": "Оглушение",
-            "strong_bash": "Сильное оглушение",
+            "shield": "Щит",
+
+            "melee_bash": "Оглушение",
             "charge": "Рыцарский разбег",
             "double_attack_if_kill": "Колун",
             "double_attack": "Двойной удар",
             "vampire": "Вампиризм",
-
-            "shield": "Щит",
+            "week_in_melee": "Штраф в ближнем бою",
 
             "infinite_counterattack": "Бесконечный отпор",
             "counterattack_rage": "Боевое безумие",

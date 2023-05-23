@@ -26,10 +26,13 @@ class Unit:
         self.exp = exp
         self.big = big
         self.abilities = kwargs
-        self.initiative_position = 0.75/initiative
+        self.initiative_position = 0.75
         self.counterattack_token = 1
         self.luck = 0
         self.morale = 0
+        self.debuffs = {}
+        self.buffs = {}
+        self.status_1_turn = {}
 
     def take_damage(self, attack, damage, name, quantity):
         amount_of_damage = round(
@@ -48,10 +51,21 @@ class Unit:
               f"и наносит {amount_of_damage} "
               f"единиц урона. Погибло {quantity_before-self.quantity} "
               f"существ.")
+        return amount_of_damage, quantity_before-self.quantity
 
     def return_attack_properties_dict(self):
-        dice = randint(0, self.max_damage - self.min_damage)
-        damage = self.min_damage + dice
+        damage_dice = randint(0, self.max_damage - self.min_damage)
+        luck_dice = randint(1, 10)
+        damage = self.min_damage + damage_dice
+        if self.luck > 0:
+            if self.luck >= luck_dice:
+                damage = damage*2
+                print(f"Удача на стороне {self.name}")
+        elif self.luck < 0:
+            if abs(self.luck) >= luck_dice:
+                damage = damage / 2
+                print(f"Удача не на стороне {self.name}")
+
         return {
             "name": self.name,
             "quantity": self.quantity,
@@ -60,10 +74,47 @@ class Unit:
         }
 
     def start_turn(self):
+        # Выдаем новый жетон контратаки если старый использован
         self.counterattack_token = 1
+        # Удаляем кончившиеся бафы.
+        buffs_list = []
+        for k, v in self.buffs.items():
+            buffs_list.append(k)
+        for x in buffs_list:
+            if x in self.buffs.keys() and self.buffs[x] < 0:
+                del self.buffs[x]
+        # Удаляем кончившиеся дебафы.
+        debuffs_list = []
+        for k, v in self.debuffs.items():
+            debuffs_list.append(k)
+        for x in debuffs_list:
+            if x in self.debuffs.keys() and self.debuffs[x] <= 0:
+                del self.debuffs[x]
+        # Проверяем не струсил ли юнит
+        # Если юнит струсил то ход он так и не делает
+        if self.morale < 0:
+            dice = randint(1, 10)
+            if abs(self.morale) >= dice:
+                print(f"{self.name} Трусит!")
+                return True
+            else:
+                return False
 
     def end_turn(self):
-        pass
+        if self.morale > 0:
+            dice = randint(1, 10)
+            if self.morale >= dice:
+                self.initiative_position = 0.5
+                print(f"{self.name} Воодушевляется!")
 
     def lose_counterattack_token(self):
-        self.counterattack_token -= 1
+        # Теряем жетон только если нет особой способности
+        if not self.abilities["infinite_counterattack"]:
+            self.counterattack_token -= 1
+
+    def timer(self, time):
+        for k, v in self.debuffs.items():
+            v -= time
+        for k, v in self.buffs.items():
+            v -= time
+
