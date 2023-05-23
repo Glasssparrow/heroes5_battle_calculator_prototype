@@ -5,9 +5,10 @@ from random import randint
 
 class Unit:
 
-    def __init__(self, name, attack, defence, min_damage,
-                 max_damage, hp, quantity,
-                 initiative, speed):
+    def __init__(self, name, quantity, attack, defence,
+                 min_damage, max_damage, hp, initiative, speed,
+                 ammo, cost, growth, extra_growth, exp, big,
+                 **kwargs):
         self.name = name
         self.attack = attack
         self.defence = defence
@@ -18,8 +19,17 @@ class Unit:
         self.quantity = quantity
         self.initiative = initiative
         self.speed = speed
-        self.initiative_position = 1/initiative
+        self.ammo = ammo
+        self.cost = cost
+        self.growth = growth
+        self.extra_growth = extra_growth
+        self.exp = exp
+        self.big = big
+        self.abilities = kwargs
+        self.initiative_position = 0.75/initiative
         self.counterattack_token = 1
+        self.luck = 0
+        self.morale = 0
 
     def take_damage(self, attack, damage, name, quantity):
         amount_of_damage = round(

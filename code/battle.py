@@ -3,7 +3,9 @@ from .common import choose_first_strike
 
 
 def fight(attacker, defender):
-    print(f"Ход {attacker.name}.")
+    print(f"Ход {attacker.name}. Шкала инициативы: "
+          f"{attacker.name}: {attacker.initiative_position}, "
+          f"{defender.name}: {defender.initiative_position}")
     defender.take_damage(**attacker.return_attack_properties_dict())
     if defender.counterattack_token > 0 and defender.quantity > 0:
         attacker.take_damage(**defender.return_attack_properties_dict())
