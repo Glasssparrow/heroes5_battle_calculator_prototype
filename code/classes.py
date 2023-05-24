@@ -76,6 +76,8 @@ class Unit:
     def start_turn(self):
         # Выдаем новый жетон контратаки если старый использован
         self.counterattack_token = 1
+        # Очищаем статусы на 1 ход
+        self.status_1_turn = {}
         # Удаляем кончившиеся бафы.
         buffs_list = []
         for k, v in self.buffs.items():
@@ -91,14 +93,10 @@ class Unit:
             if x in self.debuffs.keys() and self.debuffs[x] <= 0:
                 del self.debuffs[x]
         # Проверяем не струсил ли юнит
-        # Если юнит струсил то ход он так и не делает
         if self.morale < 0:
             dice = randint(1, 10)
             if abs(self.morale) >= dice:
-                print(f"{self.name} Трусит!")
-                return True
-            else:
-                return False
+                self.status_1_turn["Трусость"] = 1
 
     def end_turn(self):
         if self.morale > 0:

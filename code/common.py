@@ -1,4 +1,5 @@
 from math import ceil
+from random import randint
 
 
 def sign(x):
@@ -24,8 +25,13 @@ def choose_first_strike(unit1, unit2):
 
     if rate1 > rate2:
         victory(unit1)
-    else:
+    elif rate1 < rate2:
         victory(unit2)
+    else:
+        if randint(0, 1) == 0:
+            victory(unit1)
+        else:
+            victory(unit2)
 
 
 
