@@ -1,4 +1,5 @@
 from datetime import datetime
+import logging
 
 
 def test_time(func):
@@ -8,3 +9,5 @@ def test_time(func):
         time_after = datetime.now()
         print(time_after - time_before)
     return wrapper
+
+

@@ -1,6 +1,7 @@
 from random import randint, random, uniform
-from .common import choose_first_strike, sign
+from code.common import sign
 from math import ceil
+import logging
 
 
 def strike(attacker, defender, counterattack=False):
@@ -30,15 +31,15 @@ def strike(attacker, defender, counterattack=False):
         attacker.hp += damage*0.5
         quantity_before_healing = attacker.quantity
         attacker.quantity = ceil(attacker.hp/attacker.soldier_hp)
-        print(f"{attacker.name} восстанавливает {damage*0.5} "
-              f"здоровья. Возродилось "
-              f"{attacker.quantity-quantity_before_healing}"
-              f"существо")
+        logging.info(f"{attacker.name} восстанавливает {damage*0.5} "
+                     f"здоровья. Возродилось "
+                     f"{attacker.quantity-quantity_before_healing}"
+                     f"существо")
 
     return kills
 
 
-def use_bash(attacker, defender):
+def did_it_worked(attacker, defender):
     bash_was_activated = False
     if (
             attacker.abilities["melee_bash"]
@@ -62,10 +63,10 @@ def fight(attacker, defender):
     # Проверяем сработало ли оглушение
     bash = False
     if attacker.abilities["melee_bash"] and defender.hp != 0:
-        bash = use_bash(attacker, defender)
+        bash = did_it_worked(attacker, defender)
     if bash:
         defender.initiative_position -= 0.5
-        print(f"{attacker.name} оглушает противника!")
+        logging.info(f"{attacker.name} оглушает противника!")
 
 
     # Проводим ответную атаку если есть жетон, юнит жив и не оглушен.
@@ -88,10 +89,10 @@ def fight(attacker, defender):
         # Проверяем сработало ли оглушение
         second_bash = False
         if attacker.abilities["melee_bash"] and defender.hp != 0:
-            second_bash = use_bash(attacker, defender)
+            second_bash = did_it_worked(attacker, defender)
         if second_bash:
             defender.initiative_position -= 0.5
-            print(f"{attacker.name} оглушает противника!")
+            logging.info(f"{attacker.name} оглушает противника!")
         # Проводим ответную атаку если есть жетон, юнит жив и не оглушен.
         # 2 контрудар только при условии 2 атаки
         if (
@@ -101,73 +102,3 @@ def fight(attacker, defender):
         ):
             kills = strike(attacker=defender, defender=attacker,
                            counterattack=True)
-
-
-def your_turn(attacker, defender):
-    fight(attacker, defender)
-
-
-def battle(unit1, unit2):
-
-    print(f"Настало время смертельной битвы между "
-          f"{unit1.quantity} {unit1.name} и "
-          f"{unit2.quantity} {unit2.name}")
-
-    choose_first_strike(unit1, unit2)
-
-    for x in range(100):
-
-        # Если существо выбили за 0 позицию на шкале, возвращаем в 0.
-        for unit in [unit1, unit2]:
-            if unit.initiative_position < 0:
-                unit.initiative_position = 0
-
-        # Находим время за которое один из юнитов достигнет 1.
-        time_need_1 = (1 - unit1.initiative_position) / unit1.initiative
-        time_need_2 = (1 - unit2.initiative_position) / unit2.initiative
-        time = min(time_need_2, time_need_1)
-        # Продвигаем юниты на шкале инициативы
-        unit1.initiative_position += time * unit1.initiative
-        unit2.initiative_position += time * unit2.initiative
-        timer = time * 10
-
-        print(f"Шкала инициативы: "
-              f"{unit1.name}: {unit1.initiative_position}, "
-              f"{unit2.name}: {unit2.initiative_position}")
-
-        # Устанавливаем в атакующую позицию того у кого позиция 1
-        if unit1.initiative_position >= 1:
-            attacker, defender = unit1, unit2
-        elif unit2.initiative_position >= 1:
-            attacker, defender = unit2, unit1
-        # Если у обоих ниже 1 (может случиться из-за ошибки округления),
-        # То спокойно объявляем что тот кто ближе достиг финиша.
-        else:
-            if unit1.initiative_position >= unit2.initiative_position:
-                attacker, defender = unit1, unit2
-            else:
-                attacker, defender = unit2, unit1
-
-        # Запускаем эффекты начала хода
-        # Если юнит струсил, то хода никакого не будет, жмем ожидание
-        attacker.start_turn()
-        if "Трусость" in attacker.status_1_turn.keys():
-            print(f"{attacker.name} Трусит!")
-            attacker.initiative_position = 0.5
-        else:
-            attacker.initiative_position = 0
-
-            # Проводим ход атакующего
-            your_turn(attacker, defender)
-        # Запускаем эффекты конца хода
-        attacker.end_turn()
-        defender.timer(timer)
-
-        endloop = False
-        for winner, loser in [(unit1, unit2), (unit2, unit1)]:
-            if loser.quantity == 0:
-                print(f"{loser.name} повержен. Осталось {winner.quantity} "
-                      f"{winner.name}")
-                endloop = True
-        if endloop:
-            break

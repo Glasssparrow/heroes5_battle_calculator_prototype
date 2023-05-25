@@ -1,6 +1,7 @@
-from .common import sign
+from code.common import sign
 from math import ceil
 from random import randint
+import logging
 
 
 class Unit:
@@ -33,6 +34,7 @@ class Unit:
         self.debuffs = {}
         self.buffs = {}
         self.status_1_turn = {}
+        self.color = "Бесцветный"
 
     def take_damage(self, attack, damage, name, quantity):
         amount_of_damage = round(
@@ -46,7 +48,8 @@ class Unit:
         if self.hp < 0:
             self.hp = 0
         self.quantity = ceil(self.hp/self.soldier_hp)
-        print(f"{name} ({quantity} шт.) атакует {self.name} "
+        logging.info(
+              f"{name} ({quantity} шт.) атакует {self.name} "
               f"({quantity_before} шт.) "
               f"и наносит {amount_of_damage} "
               f"единиц урона. Погибло {quantity_before-self.quantity} "
@@ -60,11 +63,11 @@ class Unit:
         if self.luck > 0:
             if self.luck >= luck_dice:
                 damage = damage*2
-                print(f"Удача на стороне {self.name}")
+                logging.info(f"Удача на стороне {self.name}")
         elif self.luck < 0:
             if abs(self.luck) >= luck_dice:
                 damage = damage / 2
-                print(f"Удача не на стороне {self.name}")
+                logging.info(f"Удача не на стороне {self.name}")
 
         return {
             "name": self.name,
@@ -103,7 +106,7 @@ class Unit:
             dice = randint(1, 10)
             if self.morale >= dice:
                 self.initiative_position = 0.5
-                print(f"{self.name} Воодушевляется!")
+                logging.info(f"{self.name} Воодушевляется!")
 
     def lose_counterattack_token(self):
         # Теряем жетон только если нет особой способности
