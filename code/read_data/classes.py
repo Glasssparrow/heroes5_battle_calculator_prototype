@@ -1,6 +1,6 @@
 from code.common import sign
 from math import ceil
-from random import randint
+from random import randint, uniform
 import logging
 
 
@@ -27,7 +27,7 @@ class Unit:
         self.exp = exp
         self.big = big
         self.abilities = kwargs
-        self.initiative_position = 0.75
+        self.initiative_position = uniform(0, 0.25)
         self.counterattack_token = 1
         self.luck = 0
         self.morale = 0
