@@ -3,8 +3,8 @@ from .common import sign
 from math import ceil
 from .battle.melee import fight
 from .initiative.get_order_list import get_order_list
-from code.decisionmaker.distance_and_visualisation import *
-from code.decisionmaker.decisionmaker import decision_maker, choose_tactics
+from code_of_the_program.decisionmaker.distance_and_visualisation import *
+from code_of_the_program.decisionmaker.decisionmaker import decision_maker, choose_tactics
 import logging
 
 

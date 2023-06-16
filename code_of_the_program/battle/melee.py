@@ -1,5 +1,5 @@
 from random import randint, random, uniform
-from code.common import sign
+from code_of_the_program.common import sign
 from math import ceil
 import logging
 

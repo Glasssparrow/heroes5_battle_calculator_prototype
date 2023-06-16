@@ -1,4 +1,4 @@
-from code.common import sign
+from code_of_the_program.common import sign
 from math import ceil
 from random import randint, uniform
 import logging

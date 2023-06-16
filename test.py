@@ -1,7 +1,7 @@
-from code.read_data.read_data import get_data
-from code.read_data.get_unit_tuple import get_units_tuple
-from code.initiative_and_movement import battle
-from code.test import test_time
+from code_of_the_program.read_data.read_data import get_data
+from code_of_the_program.read_data.get_unit_tuple import get_units_tuple
+from code_of_the_program.initiative_and_movement import battle
+from code_of_the_program.test import test_time
 import logging
 
 

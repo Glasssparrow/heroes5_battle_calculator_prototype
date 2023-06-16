@@ -1,4 +1,4 @@
-from code.common import sign
+from code_of_the_program.common import sign
 
 
 def choose_tactics(unit1, unit2):
