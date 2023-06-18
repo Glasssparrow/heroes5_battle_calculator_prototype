@@ -1,6 +1,8 @@
 from random import choice, uniform
 
 
+# Идея в том что нужно возвращать характеристику с учетом всех бафов и дебафов,
+# а перезаписывать уже характеристику самого юнита.
 class UnitStat:
 
     def __set_name__(self, owner, name):
