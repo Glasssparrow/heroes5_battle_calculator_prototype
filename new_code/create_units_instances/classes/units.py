@@ -73,7 +73,7 @@ class Unit:
 
         stats = ["attack", "defence", "min_damage", "max_damage",
                  "health", "initiative", "speed",
-                 "growth", "extra_growth", "ammo", "cost", "exp", "big"]
+                 "ammo"]
         for stat in stats:
             if stat not in kwargs.keys():
                 raise ValueError(f"Не найден аргумент {stat}")
