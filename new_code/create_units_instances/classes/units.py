@@ -61,7 +61,7 @@ class Unit:
 
     # Предполагается что kwargs содержит только элементы из stats.
     # Остальные элементы словаря будут проигнорированы.
-    def __init__(self, name, **kwargs):
+    def __init__(self, name):
         self.name = name
         self.initiative_position = uniform(0, 0.25)
         self.counterattack_token = 1
@@ -75,12 +75,40 @@ class Unit:
                  "health", "initiative", "speed",
                  "ammo"]
         for stat in stats:
-            if stat not in kwargs.keys():
-                raise ValueError(f"Не найден аргумент {stat}")
-            self.__dict__[stat] = kwargs[stat]
+            self.__dict__[f"_{stat}"] = 1
 
-        self.luck = 0
-        self.morale = 0
+        self._luck = 0
+        self._morale = 0
+
+        # Иммунитеты
+        for ability in [
+            "blind_immune",
+            "berserk_immune",
+            "slow_immune",
+            "control_immune",
+            "weakening_immune",
+        ]:
+            self.__dict__[ability] = False
+
+        # Боевые способности
+        for ability in [
+            "week_in_melee",
+            "melee_bash",
+            "shield",
+            "double_attack_if_kill",
+            "infinite_counterattack",
+            "counterattack_rage",
+            "dispell_strike",
+            "chivalry_charge",
+            "vampire",
+        ]:
+            self.__dict__[ability] = False
+
+        # Тестовые способности
+        for ability in [
+            "rage_of_the_dummy",
+        ]:
+            self.__dict__[ability] = False
 
     def apply_effect(self):
         pass
