@@ -25,4 +25,9 @@ def test_battle(unit1_name, unit2_name, number_of_battles,
     if unit1.color == unit2.color:
         unit1.color = "Бесцветный"
 
-    result = battle(unit1, unit2, number_of_battles)
+    x = 0
+    logging.basicConfig(level=logging.INFO,
+                        filename=f"log/battle{x}.log",
+                        filemode="w", force=True)
+
+    result = battle(unit1, unit2)

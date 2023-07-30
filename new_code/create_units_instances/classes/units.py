@@ -89,6 +89,7 @@ class Unit:
             "weakening_immune",
         ]:
             self.__dict__[ability] = False
+        self.vampirism_immune = True
 
         # Боевые способности
         for ability in [
