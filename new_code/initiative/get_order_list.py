@@ -1,6 +1,10 @@
 
 
 def get_order_list(unit1, unit2):
+    for unit in [unit1, unit2]:
+        if unit.initiative_position < 0:
+            unit.initiative_position = 0
+
     fast_unit, slow_unit = unit1, unit2
     if fast_unit.initiative < slow_unit.initiative:
         fast_unit, slow_unit = slow_unit, fast_unit
