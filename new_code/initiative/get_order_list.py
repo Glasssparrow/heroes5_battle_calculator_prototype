@@ -46,3 +46,13 @@ def get_order_list(unit1, unit2):
         fast_unit.initiative_position += time_until_turn * fast_unit.initiative
 
     return result
+
+
+def get_unit_types_for_order_list(order_list, unit1, unit2):
+    unit_types = []
+    for color in order_list:
+        if color == unit1.color:
+            unit_types.append(unit1.name)
+        else:
+            unit_types.append(unit2.name)
+    return unit_types
