@@ -4,6 +4,7 @@ from new_code.decisions.choose_tactic import choose_tactic
 from new_code.decisions.choose_action import choose_action
 from new_code.move.move import move
 from new_code.visualisation.get_grid import get_grid
+from new_code.melee_fight.melee import melee_fight
 
 
 def battle(unit1, unit2):
@@ -43,6 +44,8 @@ def battle(unit1, unit2):
                 f"на {move_to[0]},{move_to[1]} и применить\"{action}\"")
 
         move(active, passive, move_to)
+        if action == "strike":
+            melee_fight(active, passive)
 
         grid_after = get_grid(unit1, unit2)
         for row in range(10):
