@@ -11,6 +11,12 @@ def get_order_list(unit1, unit2):
     # Вычисляем "время" через которое юниты получат ход
     time_fast = (1-fast_unit.initiative_position)/fast_unit.initiative
     time_slow = (1-slow_unit.initiative_position)/slow_unit.initiative
+    if time_fast < time_slow:
+        turn_of_the_fast_unit = True
+        time_until_turn = time_fast
+    else:
+        turn_of_the_fast_unit = False
+        time_until_turn = time_slow
     # Вычисляем время прохождения полного круга
     step_fast = 1 / fast_unit.initiative
     step_slow = 1 / slow_unit.initiative
@@ -31,5 +37,12 @@ def get_order_list(unit1, unit2):
     result = []
     for v in sorted_items:
         result.append(v[1])
+
+    if turn_of_the_fast_unit:
+        fast_unit.initiative_position = 0
+        slow_unit.initiative_position += time_until_turn * slow_unit.initiative
+    else:
+        slow_unit.initiative_position = 0
+        fast_unit.initiative_position += time_until_turn * fast_unit.initiative
 
     return result
