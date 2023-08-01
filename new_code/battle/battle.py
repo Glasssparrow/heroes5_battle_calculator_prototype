@@ -1,6 +1,7 @@
 import logging
 from new_code.initiative.get_order_list import get_order_list, get_unit_types_for_order_list
 from new_code.decisions.choose_tactic import choose_tactic
+from new_code.visualisation.get_grid import get_grid
 
 
 def battle(unit1, unit2):
@@ -20,3 +21,8 @@ def battle(unit1, unit2):
             logging.info(order_list)
         else:
             logging.info(order_with_types)
+
+        grid_before = get_grid(unit1, unit2)
+        grid_after = get_grid(unit1, unit2)
+        for row in range(10):
+            logging.info(f"{grid_before[row]}     {grid_after[row]}")
