@@ -1,6 +1,8 @@
 import logging
 from new_code.initiative.get_order_list import get_order_list, get_unit_types_for_order_list
 from new_code.decisions.choose_tactic import choose_tactic
+from new_code.decisions.choose_action import choose_action
+from new_code.move.move import move
 from new_code.visualisation.get_grid import get_grid
 
 
@@ -23,6 +25,25 @@ def battle(unit1, unit2):
             logging.info(order_with_types)
 
         grid_before = get_grid(unit1, unit2)
+
+        if unit1.initiative_position == 0:
+            active, passive = unit1, unit2
+        else:
+            active, passive = unit2, unit1
+
+        move_to, action = choose_action(active, passive)
+
+        if move_to[0] == active.position[0] and move_to[1] == active.position[1]:
+            logging.info(
+                f"{active.name} (цвет {active.color}) решает стоять "
+                f"на месте и применить\"{action}\"")
+        else:
+            logging.info(
+                f"{active.name} (цвет {active.color}) решает передвинуться "
+                f"на {move_to[0]},{move_to[1]} и применить\"{action}\"")
+
+        move(active, passive, move_to)
+
         grid_after = get_grid(unit1, unit2)
         for row in range(10):
             logging.info(f"{grid_before[row]}     {grid_after[row]}")
