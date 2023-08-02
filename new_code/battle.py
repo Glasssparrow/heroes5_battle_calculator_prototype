@@ -45,7 +45,8 @@ def battle(unit1, unit2):
 
         move(active, passive, move_to)
 
-        melee_fight(active, passive)
+        if action == "strike":
+            melee_fight(active, passive)
 
         if action == "strike":
             melee_fight(active, passive)
