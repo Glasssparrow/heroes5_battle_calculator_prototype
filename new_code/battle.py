@@ -44,6 +44,9 @@ def battle(unit1, unit2):
                 f"на {move_to[0]},{move_to[1]} и применить\"{action}\"")
 
         move(active, passive, move_to)
+
+        melee_fight(active, passive)
+
         if action == "strike":
             melee_fight(active, passive)
 
