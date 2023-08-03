@@ -30,8 +30,12 @@ class UnitStat:
                 result = 0.1
 
         if self.name == "min_damage":
-            if result >= instance.max_damage:
-                return instance.max_damage
+            if result >= instance._max_damage:
+                return instance._max_damage
+
+        if self.name == "max_damage":
+            if result <= instance._min_damage:
+                return instance._min_damage
 
         if self.name == "initiative":
             result = round(result, 1)
