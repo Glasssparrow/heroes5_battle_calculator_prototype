@@ -1,4 +1,5 @@
-from random import choice, uniform
+from random import choice, uniform, randint
+from logging import info
 
 
 # Идея в том что нужно возвращать характеристику с учетом всех бафов и дебафов,
@@ -117,3 +118,21 @@ class Unit:
 
     def apply_effect(self):
         pass
+
+    def wheel_of_fate(self):
+        if self.luck >= 0:
+            dice = randint(0, 9)
+            if self.luck > dice:
+                info(f"Удача на стороне {self.name} (цвет {self.color})")
+                return 2
+            else:
+                return 1
+        else:
+            dice = randint(0, 9)
+            if self.luck > dice*(-1):
+                info(f"Удача отворачивается от {self.name} (цвет {self.color})")
+                return 0.5
+            else:
+                return 1
+
+
