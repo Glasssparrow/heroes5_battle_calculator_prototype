@@ -17,7 +17,7 @@ class UnitStat:
             result += buff.__dict__[self.stat] * result
             result += buff.__dict__[self.flat_stat]
 
-        if self.name in ["luck", "morale"]:
+        if self.name in ["_luck", "_morale"]:
             if -5 <= result <= 5:
                 return round(result, 0)
             elif result > 5:
@@ -27,18 +27,18 @@ class UnitStat:
 
         if result <= 0:
             result = 0
-            if self.name == "initiative":
+            if self.name == "_initiative":
                 result = 0.1
 
-        if self.name == "min_damage":
+        if self.name == "_min_damage":
             if result >= instance._max_damage:
                 return instance._max_damage
 
-        if self.name == "max_damage":
+        if self.name == "_max_damage":
             if result <= instance._min_damage:
                 return instance._min_damage
 
-        if self.name == "initiative":
+        if self.name == "_initiative":
             result = round(result, 1)
         else:
             result = round(result, 0)
