@@ -48,9 +48,6 @@ def battle(unit1, unit2):
         if action == "strike":
             melee_fight(active, passive)
 
-        if action == "strike":
-            melee_fight(active, passive)
-
         grid_after = get_grid(unit1, unit2)
         for row in range(10):
             logging.info(f"{grid_before[row]}     {grid_after[row]}")
