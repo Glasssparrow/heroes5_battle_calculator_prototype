@@ -1,5 +1,6 @@
 from random import choice, uniform, randint
 from logging import info
+from math import copysign, ceil
 
 
 # Идея в том что нужно возвращать характеристику с учетом всех бафов и дебафов,
@@ -138,4 +139,20 @@ class Unit:
                 return 1
 
     def take_damage(self, attack, damage):
-        pass
+        amount_of_damage = round(
+            damage *
+            (1 + 0.05 * abs(attack - self.defence)) **
+            copysign(1, attack - self.defence),
+            0
+        )
+        self.hp = self.hp - amount_of_damage
+        quantity_before = self.quantity
+        if self.hp < 0:
+            self.hp = 0
+        self.quantity = ceil(self.hp / self.health)
+        info(
+            f"{self.name} ({quantity_before} шт.) "
+            f"получает {amount_of_damage} "
+            f"единиц урона. Погибло {quantity_before - self.quantity} "
+            f"существ.")
+        return amount_of_damage, quantity_before - self.quantity
