@@ -82,6 +82,8 @@ class Unit:
         for stat in stats:
             self.__dict__[f"_{stat}"] = 1
 
+        self.hp = 0
+        self.quantity = 0
         self._luck = 0
         self._morale = 0
 
@@ -135,4 +137,5 @@ class Unit:
             else:
                 return 1
 
-
+    def take_damage(self, attack, damage):
+        pass
