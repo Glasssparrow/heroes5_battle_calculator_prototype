@@ -6,9 +6,10 @@ def get_attack_properties(unit):
 
     attack = unit.attack
 
-    min_damage = unit.min_damage
-    max_damage = unit.max_damage
-    multiplier = unit.wheel_of_fate() * unit.quantity
-    damage = randint(ceil(min_damage*multiplier), ceil(max_damage*multiplier))
+    luck_modifier = unit.wheel_of_fate()
+    multiplier = luck_modifier * unit.quantity
+    min_damage = ceil(unit.min_damage * multiplier)
+    max_damage = ceil(unit.max_damage * multiplier)
+    damage = randint(min_damage, max_damage)
 
     return attack, damage
