@@ -1,4 +1,4 @@
-from new_code.constants import (
+from simulation_code.constants import (
     IMMUNITIES, IMMUNITIES_REVERSE, BATTLE_ABILITIES, SKILLS,
     TESTING_ABILITIES, TESTING_SKILLS
 )

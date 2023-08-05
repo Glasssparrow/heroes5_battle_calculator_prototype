@@ -1,4 +1,4 @@
-from new_code.create_units_instances.classes.skills import *
+from simulation_code.create_units_instances.classes.skills import *
 
 
 IMMUNITIES = {

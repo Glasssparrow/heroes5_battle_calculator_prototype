@@ -1,5 +1,5 @@
 from math import copysign
-from new_code.move.distance import distance_between_units
+from simulation_code.move.distance import distance_between_units
 
 
 def base_chance(attacker, defender):

@@ -1,10 +1,10 @@
 import logging
-from new_code.initiative.get_order_list import get_order_list, get_unit_types_for_order_list
-from new_code.decisions.choose_tactic import choose_tactic
-from new_code.decisions.choose_action import choose_action
-from new_code.move.move import move
-from new_code.visualisation.get_grid import get_grid
-from new_code.melee_fight.melee import melee_fight
+from simulation_code.initiative.get_order_list import get_order_list, get_unit_types_for_order_list
+from simulation_code.decisions.choose_tactic import choose_tactic
+from simulation_code.decisions.choose_action import choose_action
+from simulation_code.move.move import move
+from simulation_code.visualisation.get_grid import get_grid
+from simulation_code.melee_fight.melee import melee_fight
 
 
 def battle(unit1, unit2):

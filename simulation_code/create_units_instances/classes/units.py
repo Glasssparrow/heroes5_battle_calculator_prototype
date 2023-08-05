@@ -1,7 +1,7 @@
 from random import choice, uniform, randint
 from logging import info
 from math import copysign, ceil
-from new_code.constants import (
+from simulation_code.constants import (
     IMMUNITIES, IMMUNITIES_REVERSE, BATTLE_ABILITIES, TESTING_ABILITIES
 )
 
