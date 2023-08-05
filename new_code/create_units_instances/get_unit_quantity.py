@@ -18,3 +18,4 @@ def get_unit_quantity(quantity_type, quantity, unit, data):
         unit.quantity = 1
 
     unit.hp = unit.quantity * unit.health
+    unit.max_hp = unit.hp

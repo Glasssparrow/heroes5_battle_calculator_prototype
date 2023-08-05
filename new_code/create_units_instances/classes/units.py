@@ -84,6 +84,7 @@ class Unit:
             self.__dict__[f"_{stat}"] = 1
 
         self.hp = 0
+        self.max_hp = 0
         self.quantity = 0
         self._luck = 0
         self._morale = 0
@@ -156,3 +157,7 @@ class Unit:
             f"единиц урона. Погибло {quantity_before - self.quantity} "
             f"существ.")
         return amount_of_damage, quantity_before - self.quantity
+
+    @property
+    def soldier_hp(self):
+        return self.hp - ((self.quantity-1) * self.health)
