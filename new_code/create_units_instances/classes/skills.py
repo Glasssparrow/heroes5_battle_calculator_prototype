@@ -33,3 +33,14 @@ class PeasantBash(Skill):
             return True
         else:
             return False
+
+
+class FootmanBash(PeasantBash):
+
+    def did_worked(self, base_chance=1, skill_range=100):
+        dice = random()
+        chance = 1 - (1 - base_chance) ** 1.5
+        if dice < base_chance:
+            return True
+        else:
+            return False

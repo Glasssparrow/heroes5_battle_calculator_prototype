@@ -28,6 +28,7 @@ BATTLE_ABILITIES = {
 
 SKILLS = {
     "Оглушение": PeasantBash(),
+    "Оглушение щитом": FootmanBash()
 }
 
 TESTING_ABILITIES = {
