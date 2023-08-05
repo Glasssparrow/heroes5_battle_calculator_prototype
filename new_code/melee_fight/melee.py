@@ -1,5 +1,6 @@
 from .common.attack_properties import get_attack_properties
 from .effects.apply import apply_effects_before_attack
+from .effects.dispell import dispell_after_counterattack
 
 
 def strike(attacker, defender):
@@ -23,3 +24,5 @@ def melee_fight(attacker, defender):
 
     if can_counter(attacker=defender, target=attacker):
         strike(defender, attacker)
+
+    dispell_after_counterattack(defender)

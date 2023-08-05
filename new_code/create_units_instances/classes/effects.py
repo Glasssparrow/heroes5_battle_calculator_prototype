@@ -16,6 +16,7 @@ class Effect:
 
         self.timer = 0
         self.check_immune = []
+        self.can_be_dispelled_by_enemy = False
 
         self.dispell_after_counterattack = False
         self.dispell_by_timer = False
