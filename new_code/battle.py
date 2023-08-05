@@ -34,6 +34,7 @@ def battle(unit1, unit2):
 
         logging.info(
             f"Наступает ход {active.quantity} шт. "
+            f"(hp={active.soldier_hp}/{active.health}) "
             f"{active.name} (цвет {active.color})"
         )
 

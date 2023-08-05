@@ -78,11 +78,12 @@ class Unit:
         self.effects = []
 
         stats = ["attack", "defence", "min_damage", "max_damage",
-                 "health", "initiative", "speed",
+                 "initiative", "speed",
                  "ammo"]
         for stat in stats:
             self.__dict__[f"_{stat}"] = 1
 
+        self._health = 1
         self.hp = 0
         self.max_hp = 0
         self.quantity = 0
@@ -148,16 +149,25 @@ class Unit:
         )
         self.hp = self.hp - amount_of_damage
         quantity_before = self.quantity
+        soldier_hp_before = self.soldier_hp
         if self.hp < 0:
             self.hp = 0
         self.quantity = ceil(self.hp / self.health)
         info(
-            f"{self.name} ({quantity_before} шт.) "
+            f"{self.name} ({quantity_before} шт. hp={soldier_hp_before}) "
             f"получает {amount_of_damage} "
             f"единиц урона. Погибло {quantity_before - self.quantity} "
-            f"существ.")
+            f"существ (hp={self.soldier_hp}/{self.health}).")
         return amount_of_damage, quantity_before - self.quantity
 
     @property
     def soldier_hp(self):
-        return self.hp - ((self.quantity-1) * self.health)
+        return int(self.hp - ((self.quantity-1) * self.health))
+
+    @property
+    def health(self):
+        return int(self._health)
+
+    @health.setter
+    def health(self, value):
+        self._health = value
