@@ -88,6 +88,7 @@ class Unit:
         self.quantity = 0
         self._luck = 0
         self._morale = 0
+        self.moved = 0
 
         # Иммунитеты
         for ability in [

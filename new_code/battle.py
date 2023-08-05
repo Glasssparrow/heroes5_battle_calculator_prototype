@@ -38,7 +38,7 @@ def battle(unit1, unit2):
             f"{active.name} (цвет {active.color})"
         )
 
-        move_to, action = choose_action(active, passive)
+        move_to, action, movement_type = choose_action(active, passive)
 
         if move_to[0] == active.position[0] and move_to[1] == active.position[1]:
             logging.info(
@@ -49,7 +49,7 @@ def battle(unit1, unit2):
                 f"{active.name} (цвет {active.color}) решает передвинуться "
                 f"на {move_to[0]},{move_to[1]} и применить\"{action}\"")
 
-        move(active, passive, move_to)
+        move(active, passive, move_to, movement_type)
 
         if action == "strike":
             melee_fight(active, passive)

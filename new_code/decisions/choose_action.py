@@ -5,7 +5,8 @@ def choose_action(active, passive):
         move_to, action = berserk(active, passive)
     else:
         move_to, action = dummy(active, passive)
-    return move_to, action
+    movement_type = "move_and_stay"
+    return move_to, action, movement_type
 
 
 def berserk(active, passive):
