@@ -34,6 +34,9 @@ def get_order_list(unit1, unit2):
         del order[sorted_items[0][0]]
         del sorted_items[0]
 
+    # Разворачиваем обратно по возрастанию
+    sorted_items.sort()
+    # Собираем итоговый лист для визуализации
     result = []
     for v in sorted_items:
         result.append(v[1])

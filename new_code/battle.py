@@ -12,6 +12,8 @@ def battle(unit1, unit2):
                  f"{unit1.quantity} {unit1.name} (цвет {unit1.color}) и "
                  f"{unit2.quantity} {unit2.name} (цвет {unit2.color})")
 
+    unit1.color, unit2.color = "Красный", "Синий"
+
     choose_tactic(unit1, unit2)
 
     for x in range(100):
