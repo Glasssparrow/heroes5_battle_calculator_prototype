@@ -35,6 +35,7 @@ def battle(unit1, unit2):
             f"(hp={active.soldier_hp}/{active.health}) "
             f"{active.name} (цвет {active.color})"
         )
+        active.start_turn()
 
         move_to, action, movement_type = choose_action(active, passive)
 

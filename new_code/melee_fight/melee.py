@@ -10,6 +10,8 @@ def strike(attacker, defender):
 
 def can_counter(attacker, target):
     can_attack = True
+    if not attacker.counterattack_token:
+        return False
     for effect in attacker.effects:
         if effect.cannot_counterattack:
             return False
@@ -24,5 +26,6 @@ def melee_fight(attacker, defender):
 
     if can_counter(attacker=defender, target=attacker):
         strike(defender, attacker)
+        defender.lose_counterattack_token()
 
     dispell_after_counterattack(defender)

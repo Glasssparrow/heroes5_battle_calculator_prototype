@@ -67,7 +67,7 @@ class Unit:
     def __init__(self, name):
         self.name = name
         self.initiative_position = uniform(0, 0.25)
-        self.counterattack_token = 1
+        self.counterattack_token = True
         self.color = choice(
             ["Красный", "Оранжевый", "Желтый", "Зеленый",
              "Голубой", "Синий", "Фиолетовый"]
@@ -176,3 +176,10 @@ class Unit:
             return self._min_damage
         else:
             return self._max_damage
+
+    def lose_counterattack_token(self):
+        if not self.infinite_counterattack:
+            self.counterattack_token = False
+
+    def start_turn(self):
+        self.counterattack_token = True
