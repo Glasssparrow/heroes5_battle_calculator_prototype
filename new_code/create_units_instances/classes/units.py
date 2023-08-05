@@ -59,7 +59,6 @@ class Unit:
     defence = UnitStat()
     min_damage = UnitStat()
     max_damage = UnitStat()
-    health = UnitStat()
     initiative = UnitStat()
     speed = UnitStat()
     luck = UnitStat()
@@ -147,14 +146,15 @@ class Unit:
             copysign(1, attack - self.defence),
             0
         )
+        soldier_hp_before = self.soldier_hp
         self.hp = self.hp - amount_of_damage
         quantity_before = self.quantity
-        soldier_hp_before = self.soldier_hp
         if self.hp < 0:
             self.hp = 0
         self.quantity = ceil(self.hp / self.health)
         info(
-            f"{self.name} ({quantity_before} шт. hp={soldier_hp_before}) "
+            f"{self.name} ({quantity_before} шт. "
+            f"hp={soldier_hp_before}/{self.health}) "
             f"получает {amount_of_damage} "
             f"единиц урона. Погибло {quantity_before - self.quantity} "
             f"существ (hp={self.soldier_hp}/{self.health}).")

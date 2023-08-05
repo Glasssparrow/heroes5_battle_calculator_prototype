@@ -9,3 +9,5 @@ def strike(attacker, defender):
 def melee_fight(attacker, defender):
 
     strike(attacker, defender)
+
+    strike(defender, attacker)
