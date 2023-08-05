@@ -2,7 +2,7 @@ from new_code.create_units_instances.get_data import get_data
 from new_code.create_units_instances.get_unit_with_stats import get_unit_with_stats_from_data
 from new_code.create_units_instances.get_unit_quantity import get_unit_quantity
 from new_code.create_units_instances.add_abilities import add_unit_abilities_from_data
-from code_of_the_program.test import test_time
+from .test_time import test_time
 from new_code.battle import battle
 import logging
 
