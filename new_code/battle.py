@@ -32,6 +32,11 @@ def battle(unit1, unit2):
         else:
             active, passive = unit2, unit1
 
+        logging.info(
+            f"Наступает ход {active.quantity} шт. "
+            f"{active.name} (цвет {active.color})"
+        )
+
         move_to, action = choose_action(active, passive)
 
         if move_to[0] == active.position[0] and move_to[1] == active.position[1]:
@@ -51,3 +56,14 @@ def battle(unit1, unit2):
         grid_after = get_grid(unit1, unit2)
         for row in range(10):
             logging.info(f"{grid_before[row]}     {grid_after[row]}")
+
+        if unit1.hp == 0 or unit2.hp == 0:
+            logging.info(
+                f"{unit1.name} (цвет {unit1.color}) побеждает!"
+            )
+            break
+        elif unit2.hp == 0:
+            logging.info(
+                f"{unit2.name} (цвет {unit2.color}) побеждает!"
+            )
+            break
