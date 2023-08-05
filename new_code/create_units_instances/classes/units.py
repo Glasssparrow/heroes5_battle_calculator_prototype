@@ -1,6 +1,9 @@
 from random import choice, uniform, randint
 from logging import info
 from math import copysign, ceil
+from new_code.constants import (
+    IMMUNITIES, IMMUNITIES_REVERSE, BATTLE_ABILITIES, TESTING_ABILITIES
+)
 
 
 # Идея в том что нужно возвращать характеристику с учетом всех бафов и дебафов,
@@ -31,13 +34,8 @@ class UnitStat:
             if self.name == "_initiative":
                 result = 0.1
 
-        if self.name == "_min_damage":
-            if result >= instance._max_damage:
-                return instance._max_damage
-
-        if self.name == "_max_damage":
-            if result <= instance._min_damage:
-                return instance._min_damage
+        if self.name == "_min_damage" or self.name == "_max_damage":
+            return instance.return_damage_into_range(result)
 
         if self.name == "_initiative":
             result = round(result, 1)
@@ -77,11 +75,13 @@ class Unit:
         self.effects = []
         self.skills = []
 
-        stats = ["attack", "defence", "min_damage", "max_damage",
-                 "initiative", "speed",
-                 "ammo"]
-        for stat in stats:
-            self.__dict__[f"_{stat}"] = 1
+        self._attack = 1
+        self._defence = 1
+        self._min_damage = 1
+        self._max_damage = 1
+        self._initiative = 1
+        self._speed = 1
+        self._ammo = 1
 
         self._health = 1
         self.hp = 0
@@ -92,35 +92,18 @@ class Unit:
         self.moved = 0
 
         # Иммунитеты
-        for ability in [
-            "blind_immune",
-            "berserk_immune",
-            "slow_immune",
-            "control_immune",
-            "weakening_immune",
-            "machine"
-        ]:
+        for ability in IMMUNITIES.keys():
             self.__dict__[ability] = False
-        self.vampirism_immune = True
+
+        for ability in IMMUNITIES_REVERSE.keys():
+            self.__dict__[ability] = True
 
         # Боевые способности
-        for ability in [
-            "week_in_melee",
-            "melee_bash",
-            "shield",
-            "double_attack_if_kill",
-            "infinite_counterattack",
-            "counterattack_rage",
-            "dispell_strike",
-            "chivalry_charge",
-            "vampire",
-        ]:
+        for ability in BATTLE_ABILITIES.keys():
             self.__dict__[ability] = False
 
         # Тестовые способности
-        for ability in [
-            "rage_of_the_dummy",
-        ]:
+        for ability in TESTING_ABILITIES.keys():
             self.__dict__[ability] = False
 
     def apply_effect(self, new_effect):
@@ -185,3 +168,11 @@ class Unit:
     @health.setter
     def health(self, value):
         self._health = value
+
+    def return_damage_into_range(self, damage):
+        if self._min_damage <= damage <= self._max_damage:
+            return damage
+        elif self._min_damage > damage:
+            return self._min_damage
+        else:
+            return self._max_damage
