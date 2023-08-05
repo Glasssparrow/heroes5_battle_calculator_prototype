@@ -1,4 +1,4 @@
-
+from new_code.create_units_instances.classes.skills import *
 
 def add_unit_abilities_from_data(data, unit):
     abilities_list = data.loc[unit.name, "Способности"].split(",")
@@ -39,3 +39,10 @@ def add_unit_abilities_from_data(data, unit):
     }.items():
         if word_from_data in abilities_list:
             unit.__dict__[ability_name] = True
+
+    # Навыки
+    for word_from_data, instance_of_skill in {
+        "Оглушение": PeasantBash(),
+    }.items():
+        if word_from_data in abilities_list:
+            unit.skills.append(instance_of_skill)

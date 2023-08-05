@@ -75,6 +75,7 @@ class Unit:
              "Голубой", "Синий", "Фиолетовый"]
         )
         self.effects = []
+        self.skills = []
 
         stats = ["attack", "defence", "min_damage", "max_damage",
                  "initiative", "speed",
@@ -97,6 +98,7 @@ class Unit:
             "slow_immune",
             "control_immune",
             "weakening_immune",
+            "machine"
         ]:
             self.__dict__[ability] = False
         self.vampirism_immune = True
@@ -121,8 +123,19 @@ class Unit:
         ]:
             self.__dict__[ability] = False
 
-    def apply_effect(self):
-        pass
+    def apply_effect(self, new_effect):
+        info(f"На {self.name} (цвет {self.color}) "
+             f"наложен эффект {new_effect.name}")
+        effect_not_in_effects = True
+        number_of_effect = 0
+        for x in range(len(self.effects)):
+            if self.effects[x].name == new_effect.name:
+                effect_not_in_effects = False
+                number_of_effect = x
+        if effect_not_in_effects:
+            self.effects.append(new_effect)
+        else:
+            self.effects[number_of_effect].reapply(new_effect)
 
     def wheel_of_fate(self):
         if self.luck >= 0:
