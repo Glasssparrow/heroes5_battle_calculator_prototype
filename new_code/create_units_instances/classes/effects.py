@@ -15,6 +15,7 @@ class Effect:
         self.name = "default_name"
 
         self.timer = 0
+        self.type = "buff"
         self.check_immune = []
         self.can_be_dispelled_by_enemy = False
 
@@ -38,6 +39,7 @@ class Bash(Effect):
     def __init__(self):
         super().__init__()
         self.name = "bash"
+        self.buff = "debuff"
         self.check_immune = ["machine"]
 
         self.dispell_after_counterattack = True
