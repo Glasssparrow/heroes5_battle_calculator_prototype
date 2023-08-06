@@ -30,4 +30,4 @@ def test_battle(unit1_name, unit2_name, number_of_battles,
                         filename=f"log/battle{x}.log",
                         filemode="w", force=True)
 
-    result = battle(unit1, unit2)
+    battle(unit1, unit2)
