@@ -54,6 +54,18 @@ def get_order_list(unit1, unit2, list_len):
         slow_unit.initiative_position = 0
         fast_unit.initiative_position += time_until_turn * fast_unit.initiative
 
+    timer = time_until_turn * 10
+
+    for_delete = []
+    for unit in [unit1, unit2]:
+        for i, effect in enumerate(unit.effects):
+            effect.timer -= timer
+            if effect.timer < 0 and effect.dispell_by_timer:
+                for_delete.append(i)
+    for_delete.sort(reverse=True)
+    for i in for_delete:
+        del unit.effects[i]
+
     return result
 
 
