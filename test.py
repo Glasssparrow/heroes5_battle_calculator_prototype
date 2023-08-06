@@ -1,4 +1,4 @@
 from simulation_code.main import test_battle
 
 
-test_battle("Манекен", "Боевой грифон", 100, "Количество", 100, 20)
+test_battle("Манекен", "Яростный манекен", 100, "Количество", 100, 100)

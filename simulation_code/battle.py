@@ -17,6 +17,7 @@ def battle(unit1, unit2):
     choose_tactic(unit1, unit2)
 
     for x in range(100):
+        print(unit2.damage_multiplier)
 
         order_list = get_order_list(unit1, unit2, list_len=7)
         order_with_types = get_unit_types_for_order_list(order_list, unit1, unit2)

@@ -18,7 +18,10 @@ def get_attack_properties(unit, fight_type):
         range_modifier = 1
         chivalry_modifier = 1
     luck_modifier = unit.wheel_of_fate()
-    multiplier = luck_modifier * unit.quantity * range_modifier * chivalry_modifier
+    multiplier = (
+        luck_modifier * unit.quantity * range_modifier * chivalry_modifier *
+        unit.damage_multiplier
+    )
     min_damage = ceil(unit.min_damage * multiplier)
     max_damage = ceil(unit.max_damage * multiplier)
     damage = randint(min_damage, max_damage)

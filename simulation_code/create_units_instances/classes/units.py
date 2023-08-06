@@ -37,7 +37,7 @@ class UnitStat:
         if self.name == "_min_damage" or self.name == "_max_damage":
             return instance.return_damage_into_range(result)
 
-        if self.name == "_initiative":
+        if self.name in ["_initiative", "_damage_multiplier"]:
             result = round(result, 1)
         else:
             result = round(result, 0)
@@ -62,6 +62,9 @@ class Unit:
     luck = UnitStat()
     morale = UnitStat()
 
+    # ПЕРЕРАБОТАТЬ!!! (Да и в целом стоит привести дескрипторы в порядок)
+    damage_multiplier = UnitStat()
+
     # Предполагается что kwargs содержит только элементы из stats.
     # Остальные элементы словаря будут проигнорированы.
     def __init__(self, name):
@@ -82,6 +85,7 @@ class Unit:
         self._initiative = 1
         self._speed = 1
         self._ammo = 1
+        self._damage_multiplier = 1
 
         self._health = 1
         self.hp = 0

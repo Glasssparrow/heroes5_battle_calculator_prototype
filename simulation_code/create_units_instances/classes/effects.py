@@ -5,7 +5,8 @@ stats = ["attack", "attack_flat", "defence", "defence_flat",
          "max_damage", "max_damage_flat",
          "initiative", "initiative_flat",
          "speed", "speed_flat",
-         "luck", "luck_flat", "morale", "morale_flat"]
+         "luck", "luck_flat", "morale", "morale_flat",
+         "damage_multiplier", "damage_multiplier_flat"]
 
 
 class Effect:
@@ -52,9 +53,11 @@ class CounterattackDamageMultiplier(Effect):
     def __init__(self):
         super().__init__()
         self.name = "battle_frenzy"
-        self.attack_flat = 5
+        self.damage_multiplier = 0.5
 
         self.dispell_at_turn_start = True
 
     def reapply(self, new_instance):
-        self.attack_flat += 5
+        self.damage_multiplier = (
+            self.damage_multiplier * 1.5 + 0.5
+        )

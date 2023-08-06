@@ -52,5 +52,6 @@ def melee_fight(attacker, defender):
             info(f"{defender.name} (цвет {defender.color}) контратакует.")
             strike(defender, attacker)
             defender.lose_counterattack_token()
+            apply_effects_after_counterattack(attacker=defender, target=attacker)
 
         dispell_after_counterattack(defender)
