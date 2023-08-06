@@ -1,6 +1,16 @@
+from random import choice
 
 
 def get_order_list(unit1, unit2, list_len):
+
+    # Позиции на шкале инициативы не должны совпадать
+    # (т.к. инициатива существ может быть одинакова).
+    coin = choice([True, False])
+    if unit1.initiative_position == unit2.initiative_position:
+        if coin:
+            unit1.initiative_position += 0.01
+        else:
+            unit2.initiative_position += 0.01
     for unit in [unit1, unit2]:
         if unit.initiative_position < 0:
             unit.initiative_position = 0

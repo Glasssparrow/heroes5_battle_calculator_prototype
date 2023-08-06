@@ -26,6 +26,8 @@ class Effect:
 
         self.cannot_counterattack = False
 
+        self.bash = False
+
         for stat in stats:
             self.__dict__[stat] = 0
 
@@ -43,6 +45,7 @@ class Bash(Effect):
         self.name = "bash"
         self.buff = "debuff"
         self.check_immune = ["machine"]
+        self.bash = True
 
         self.dispell_after_counterattack = True
         self.cannot_counterattack = True
