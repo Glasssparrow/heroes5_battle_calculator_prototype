@@ -1,12 +1,12 @@
 
 
-stats = ["attack", "attack_flat", "defence", "defence_flat",
+stats = ["attack", "attack_flat",
+         "defence", "defence_flat",
          "min_damage", "min_damage_flat",
          "max_damage", "max_damage_flat",
-         "initiative", "initiative_flat",
          "speed", "speed_flat",
-         "luck", "luck_flat", "morale", "morale_flat",
-         "damage_multiplier", "damage_multiplier_flat"]
+         "luck", "morale",
+         "initiative", "damage_multiplier", ]
 
 
 class Effect:

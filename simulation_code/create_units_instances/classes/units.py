@@ -20,50 +20,81 @@ class UnitStat:
         for buff in instance.__dict__["effects"]:
             result += buff.__dict__[self.stat] * result
             result += buff.__dict__[self.flat_stat]
-
-        if self.name in ["_luck", "_morale"]:
-            if -5 <= result <= 5:
-                return round(result, 0)
-            elif result > 5:
-                return 5
-            else:
-                return -5
-
-        if result <= 0:
-            result = 0
-            if self.name == "_initiative":
-                result = 0.1
-
-        if self.name == "_min_damage" or self.name == "_max_damage":
-            return instance.return_damage_into_range(result)
-
-        if self.name in ["_initiative", "_damage_multiplier"]:
-            result = round(result, 1)
-        else:
-            result = round(result, 0)
-
+        result = round(result, 0)
         return result
 
     def __set__(self, instance, value):
         instance.__dict__[self.name] = value
 
-    def __delete__(self, instance):
-        instance.__dict__[self.name] = 0
+
+class DamageStat(UnitStat):
+
+    def __get__(self, instance, owner):
+        result = instance.__dict__[self.name]
+        for buff in instance.__dict__["effects"]:
+            result += buff.__dict__[self.stat] * result
+            result += buff.__dict__[self.flat_stat]
+        result = round(result, 0)
+        return instance.return_damage_into_range(result)
+
+
+class InitiativeAndDamageMultiplierStat(UnitStat):
+
+    def __get__(self, instance, owner):
+        result = instance.__dict__[self.name]
+        for buff in instance.__dict__["effects"]:
+            result += buff.__dict__[self.stat] * result
+        result = round(result, 1)
+        if result < 0.5:
+            return 0.5
+        return result
+
+
+class LuckStat(UnitStat):
+
+    def __get__(self, instance, owner):
+        result = instance.__dict__[self.name]
+        for buff in instance.__dict__["effects"]:
+            result += buff.__dict__[self.stat]
+        result = round(result, 0)
+        if -5 <= result <= 5:
+            return round(result, 0)
+        elif result > 5:
+            return 5
+        else:
+            return -5
+
+
+class MoraleStat(UnitStat):
+
+    def __get__(self, instance, owner):
+        result = instance.__dict__[self.name]
+        for buff in instance.__dict__["effects"]:
+            result += buff.__dict__[self.stat]
+        result = round(result, 0)
+        if instance.undead:
+            return 0
+        if -5 <= result <= 5:
+            return round(result, 0)
+        elif result > 5:
+            return 5
+        else:
+            return -5
 
 
 class Unit:
 
     attack = UnitStat()
     defence = UnitStat()
-    min_damage = UnitStat()
-    max_damage = UnitStat()
-    initiative = UnitStat()
+    min_damage = DamageStat()
+    max_damage = DamageStat()
+    initiative = InitiativeAndDamageMultiplierStat()
     speed = UnitStat()
-    luck = UnitStat()
-    morale = UnitStat()
+    luck = LuckStat()
+    morale = MoraleStat()
 
     # ПЕРЕРАБОТАТЬ!!! (Да и в целом стоит привести дескрипторы в порядок)
-    damage_multiplier = UnitStat()
+    damage_multiplier = InitiativeAndDamageMultiplierStat()
 
     # Предполагается что kwargs содержит только элементы из stats.
     # Остальные элементы словаря будут проигнорированы.

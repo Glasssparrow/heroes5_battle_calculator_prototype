@@ -7,7 +7,8 @@ IMMUNITIES = {
     "slow_immune": "Иммунитет к замедлению",
     "control_immune": "Иммунитет к контролю разума",
     "weakening_immune": "Иммунитет к ослаблению",
-    "machine": "Механизм"
+    "machine": "Механизм",
+    "undead": "Нежить",
 }
 
 IMMUNITIES_REVERSE = {
@@ -32,6 +33,7 @@ SKILLS = {
     "Оглушение": PeasantBash(),
     "Оглушение щитом": FootmanBash(),
     "Боевое безумие": BattleFrenzy(),
+    # "Ловкость": None,
 }
 
 TESTING_ABILITIES = {
