@@ -7,6 +7,8 @@ def move(active, passive, move_to, movement_type):
             copysign(active.position[0] - move_to[0], 1) +
             copysign(active.position[1] - move_to[1], 1)
         )
+        if active.agility:
+            active.get_agility()
         active.position = move_to
     else:
         pass

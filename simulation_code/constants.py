@@ -27,13 +27,13 @@ BATTLE_ABILITIES = {
     "dispell_strike": "Очищение",
     "chivalry_charge": "Рыцарский разбег",
     "vampire": "Вампиризм",
+    "agility": "Ловкость",
 }
 
 SKILLS = {
     "Оглушение": PeasantBash(),
     "Оглушение щитом": FootmanBash(),
     "Боевое безумие": BattleFrenzy(),
-    # "Ловкость": None,
 }
 
 TESTING_ABILITIES = {

@@ -1,6 +1,7 @@
 from random import choice, uniform, randint, random
 from logging import info
 from math import copysign, ceil
+from .effects import Agility
 from simulation_code.constants import (
     IMMUNITIES, IMMUNITIES_REVERSE, BATTLE_ABILITIES, TESTING_ABILITIES
 )
@@ -240,6 +241,9 @@ class Unit:
             info(f"{self.name} (цвет {self.color}) теряет эффект "
                  f"{self.effects[chosen_buff].name}")
             del self.effects[chosen_buff]
+
+    def get_agility(self):
+        self.apply_effect(Agility(self.moved))
 
     def start_turn(self):
         self.counterattack_token = True
