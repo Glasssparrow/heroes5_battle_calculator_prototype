@@ -1,6 +1,6 @@
 
 
-def get_order_list(unit1, unit2):
+def get_order_list(unit1, unit2, list_len):
     for unit in [unit1, unit2]:
         if unit.initiative_position < 0:
             unit.initiative_position = 0
@@ -25,21 +25,17 @@ def get_order_list(unit1, unit2):
         time_fast: fast_unit.color,
         time_slow: slow_unit.color
     }
-    for x in range(5):
+    for x in range(list_len):
         order[time_fast+x*step_fast] = fast_unit.color
         order[time_slow+x*step_slow] = slow_unit.color
     sorted_items = sorted(order.items(), reverse=True)
-    while (len(sorted_items) > 4 and
-           sorted_items[0][1] == sorted_items[1][1] == slow_unit.color):
-        del order[sorted_items[0][0]]
-        del sorted_items[0]
 
     # Разворачиваем обратно по возрастанию
-    sorted_items.sort()
+    sorted_items = sorted(order.items())
     # Собираем итоговый лист для визуализации
     result = []
-    for v in sorted_items:
-        result.append(v[1])
+    for x in range(list_len):
+        result.append(sorted_items[x][1])
 
     if turn_of_the_fast_unit:
         fast_unit.initiative_position = 0
