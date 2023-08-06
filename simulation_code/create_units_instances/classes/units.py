@@ -1,4 +1,4 @@
-from random import choice, uniform, randint
+from random import choice, uniform, randint, random
 from logging import info
 from math import copysign, ceil
 from simulation_code.constants import (
@@ -93,6 +93,7 @@ class Unit:
         self.quantity = 0
         self._luck = 0
         self._morale = 0
+        self.morale_status = 0
         self.moved = 0
 
         # Иммунитеты
@@ -211,6 +212,20 @@ class Unit:
 
     def start_turn(self):
         self.counterattack_token = True
+        if self.morale >= 0:
+            if self.morale * 0.1 > random():
+                self.morale_status = 1
+            else:
+                self.morale_status = 0
+        else:
+            if self.morale * 0.1 < random() * (-1):
+                self.morale_status = -1
+            else:
+                self.morale_status = 0
+        if self.morale_status == 1:
+            info(f"{self.name} (цвет {self.color}) воодушевляется!")
+        elif self.morale_status == -1:
+            info(f"{self.name} (цвет {self.color}) трусит!")
 
         # Снимаем все эффекты спадающие в начале хода
         for_delete = []
@@ -222,3 +237,6 @@ class Unit:
             info(f"С {self.name} (цвет {self.color}) спадает эффект "
                  f"{self.effects[x].name}")
             del self.effects[x]
+
+    def end_turn(self):
+        self.morale_status = 0

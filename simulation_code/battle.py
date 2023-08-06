@@ -8,6 +8,7 @@ from simulation_code.melee_fight.melee import melee_fight
 
 
 def battle(unit1, unit2):
+    unit1.morale = 5
     logging.info(f"Настало время смертельной битвы между "
                  f"{unit1.quantity} {unit1.name} (цвет {unit1.color}) и "
                  f"{unit2.quantity} {unit2.name} (цвет {unit2.color})")
@@ -39,21 +40,26 @@ def battle(unit1, unit2):
         )
         active.start_turn()
 
-        move_to, action, movement_type = choose_action(active, passive)
+        if active.morale_status >= 0:
+            move_to, action, movement_type = choose_action(active, passive)
 
-        if move_to[0] == active.position[0] and move_to[1] == active.position[1]:
-            logging.info(
-                f"{active.name} (цвет {active.color}) решает стоять "
-                f"на месте и применить\"{action}\"")
-        else:
-            logging.info(
-                f"{active.name} (цвет {active.color}) решает передвинуться "
-                f"на {move_to[0]},{move_to[1]} и применить\"{action}\"")
+            if move_to[0] == active.position[0] and move_to[1] == active.position[1]:
+                logging.info(
+                    f"{active.name} (цвет {active.color}) решает стоять "
+                    f"на месте и применить\"{action}\"")
+            else:
+                logging.info(
+                    f"{active.name} (цвет {active.color}) решает передвинуться "
+                    f"на {move_to[0]},{move_to[1]} и применить\"{action}\"")
 
-        move(active, passive, move_to, movement_type)
+            move(active, passive, move_to, movement_type)
 
-        if action == "strike":
-            melee_fight(active, passive)
+            if action == "strike":
+                melee_fight(active, passive)
+        if active.morale_status != 0:
+            active.initiative_position = 0.5
+
+        active.end_turn()
 
         grid_after = get_grid(unit1, unit2)
         for row in range(10):
