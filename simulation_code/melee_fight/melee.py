@@ -11,6 +11,8 @@ from math import ceil
 def strike(attacker, defender):
     attack, damage = get_attack_properties(attacker, "melee")
     damage_taken, soldiers_died = defender.take_damage(attack, damage)
+    if attacker.dispell_strike:
+        defender.lose_one_buff()
     if attacker.vampire:
         attacker.restore_hp(ceil(damage_taken/2))
     return damage_taken, soldiers_died

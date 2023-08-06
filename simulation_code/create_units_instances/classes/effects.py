@@ -54,6 +54,7 @@ class CounterattackDamageMultiplier(Effect):
         super().__init__()
         self.name = "battle_frenzy"
         self.damage_multiplier = 0.5
+        self.can_be_dispelled_by_enemy = True
 
         self.dispell_at_turn_start = True
 

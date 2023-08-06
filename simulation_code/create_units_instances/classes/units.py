@@ -196,6 +196,17 @@ class Unit:
         if not self.infinite_counterattack:
             self.counterattack_token = False
 
+    def lose_one_buff(self):
+        buffs_numbers = []
+        for i, effect in enumerate(self.effects):
+            if effect.type == "buff" and effect.can_be_dispelled_by_enemy:
+                buffs_numbers.append(i)
+        if buffs_numbers:
+            chosen_buff = choice(buffs_numbers)
+            info(f"{self.name} (цвет {self.color}) теряет эффект "
+                 f"{self.effects[chosen_buff].name}")
+            del self.effects[chosen_buff]
+
     def start_turn(self):
         self.counterattack_token = True
 
