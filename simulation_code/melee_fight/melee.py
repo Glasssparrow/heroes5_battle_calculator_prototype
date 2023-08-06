@@ -2,7 +2,7 @@ from .common.attack_properties import get_attack_properties
 from .effects.apply import (
     apply_effects_before_attack, base_chance, apply_effects_after_counterattack,
 )
-from .effects.dispell import dispell_after_counterattack
+from .effects.dispell import dispell_after_counterattack, dispell_by_attack
 from random import random
 from logging import info
 from math import ceil
@@ -32,6 +32,7 @@ def can_counter(attacker, target):
 
 def melee_fight(attacker, defender):
 
+    dispell_by_attack(defender)
     apply_effects_before_attack(attacker, defender)
 
     damage1, kills1 = strike(attacker, defender)
@@ -50,6 +51,8 @@ def melee_fight(attacker, defender):
         attacker.assault and base_chance(attacker, defender) > random()
     ):
         info(f"{attacker.name} (цвет {attacker.color}) атакует повторно.")
+
+        dispell_by_attack(defender)
         damage2, kills2 = strike(attacker, defender)
 
         if can_counter(attacker=defender, target=attacker):

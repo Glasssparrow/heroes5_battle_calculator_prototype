@@ -22,6 +22,7 @@ class Effect:
 
         self.dispell_at_turn_start = False
         self.dispell_after_counterattack = False
+        self.dispell_by_attack = False
         self.dispell_by_timer = False
 
         self.cannot_counterattack = False
@@ -101,4 +102,6 @@ class Blind(Effect):
         self.timer = 10
         self.cannot_act = True
         self.cannot_counterattack = True
+
         self.dispell_by_timer = True
+        self.dispell_by_attack = True
