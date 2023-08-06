@@ -8,12 +8,12 @@ from simulation_code.melee_fight.melee import melee_fight
 
 
 def battle(unit1, unit2):
-    unit1.morale = 5
+
+    unit1.color, unit2.color = "Красный", "Синий"
+
     logging.info(f"Настало время смертельной битвы между "
                  f"{unit1.quantity} {unit1.name} (цвет {unit1.color}) и "
                  f"{unit2.quantity} {unit2.name} (цвет {unit2.color})")
-
-    unit1.color, unit2.color = "Красный", "Синий"
 
     choose_tactic(unit1, unit2)
 
