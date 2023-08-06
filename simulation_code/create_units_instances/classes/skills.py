@@ -8,6 +8,7 @@ class Skill:
         self.effect = None
         self.skill_range = 100
         self.apply_before_attack = False
+        self.apply_after_counterattack = False
         self.check_immune = []
         self.target = "self"
 
@@ -44,3 +45,11 @@ class FootmanBash(PeasantBash):
             return True
         else:
             return False
+
+
+class BattleFrenzy(Skill):
+
+    def __init__(self):
+        super().__init__()
+        self.effect = CounterattackDamageMultiplier()
+        self.apply_after_counterattack = True

@@ -22,7 +22,6 @@ BATTLE_ABILITIES = {
     "double_attack_if_kill": "Колун",
     "assault": "Штурм",
     "infinite_counterattack": "Бесконечный отпор",
-    "counterattack_rage": "Боевое безумие",
     "dispell_strike": "Очищение",
     "chivalry_charge": "Рыцарский разбег",
     "vampire": "Вампиризм",
@@ -30,7 +29,8 @@ BATTLE_ABILITIES = {
 
 SKILLS = {
     "Оглушение": PeasantBash(),
-    "Оглушение щитом": FootmanBash()
+    "Оглушение щитом": FootmanBash(),
+    "Боевое безумие": BattleFrenzy(),
 }
 
 TESTING_ABILITIES = {

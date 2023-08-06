@@ -31,3 +31,20 @@ def apply_effects_before_attack(attacker, target):
                     attacker.apply_effect(skill.effect)
                 else:
                     target.apply_effect(skill.effect)
+
+
+def apply_effects_after_counterattack(attacker, target):
+    chance = base_chance(attacker, target)
+    for skill in attacker.skills:
+        if skill.apply_after_counterattack:
+            if skill.did_worked(
+                    chance, distance_between_units(attacker, target)
+            ):
+                enemy_have_immune = False
+                for immune in skill.effect.immune_to_check():
+                    if target.__dict__[immune]:
+                        enemy_have_immune = True
+                if skill.target == "self":
+                    attacker.apply_effect(skill.effect)
+                else:
+                    target.apply_effect(skill.effect)

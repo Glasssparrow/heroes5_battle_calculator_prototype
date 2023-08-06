@@ -1,5 +1,7 @@
 from .common.attack_properties import get_attack_properties
-from .effects.apply import apply_effects_before_attack, base_chance
+from .effects.apply import (
+    apply_effects_before_attack, base_chance, apply_effects_after_counterattack,
+)
 from .effects.dispell import dispell_after_counterattack
 from random import random
 from logging import info
@@ -34,6 +36,7 @@ def melee_fight(attacker, defender):
         info(f"{defender.name} (цвет {defender.color}) контратакует.")
         strike(defender, attacker)
         defender.lose_counterattack_token()
+        apply_effects_after_counterattack(attacker=defender, target=attacker)
 
     dispell_after_counterattack(defender)
 

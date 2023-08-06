@@ -19,6 +19,7 @@ class Effect:
         self.check_immune = []
         self.can_be_dispelled_by_enemy = False
 
+        self.dispell_at_turn_start = False
         self.dispell_after_counterattack = False
         self.dispell_by_timer = False
 
@@ -44,3 +45,16 @@ class Bash(Effect):
 
         self.dispell_after_counterattack = True
         self.cannot_counterattack = True
+
+
+class CounterattackDamageMultiplier(Effect):
+
+    def __init__(self):
+        super().__init__()
+        self.name = "battle_frenzy"
+        self.attack_flat = 5
+
+        self.dispell_at_turn_start = True
+
+    def reapply(self, new_instance):
+        self.attack_flat += 5
