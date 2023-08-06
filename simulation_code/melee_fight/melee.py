@@ -1,11 +1,14 @@
 from .common.attack_properties import get_attack_properties
-from .effects.apply import apply_effects_before_attack
+from .effects.apply import apply_effects_before_attack, base_chance
 from .effects.dispell import dispell_after_counterattack
+from random import random
+from logging import info
 
 
 def strike(attacker, defender):
     attack, damage = get_attack_properties(attacker, "melee")
-    defender.take_damage(attack, damage)
+    damage_taken, soldiers_died = defender.take_damage(attack, damage)
+    return damage_taken, soldiers_died
 
 
 def can_counter(attacker, target):
@@ -22,10 +25,26 @@ def melee_fight(attacker, defender):
 
     apply_effects_before_attack(attacker, defender)
 
-    strike(attacker, defender)
+    damage1, kills1 = strike(attacker, defender)
 
     if can_counter(attacker=defender, target=attacker):
+        info(f"{defender.name} (цвет {defender.color}) контратакует.")
         strike(defender, attacker)
         defender.lose_counterattack_token()
 
     dispell_after_counterattack(defender)
+
+    if (
+        attacker.double_attack or
+        attacker.double_attack_if_kill and kills1 > 0 or
+        attacker.assault and base_chance(attacker, defender) > random()
+    ):
+        info(f"{attacker.name} (цвет {attacker.color}) атакует повторно.")
+        damage2, kills2 = strike(attacker, defender)
+
+        if can_counter(attacker=defender, target=attacker):
+            info(f"{defender.name} (цвет {defender.color}) контратакует.")
+            strike(defender, attacker)
+            defender.lose_counterattack_token()
+
+        dispell_after_counterattack(defender)

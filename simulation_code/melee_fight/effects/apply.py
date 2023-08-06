@@ -3,6 +3,8 @@ from simulation_code.move.distance import distance_between_units
 
 
 def base_chance(attacker, defender):
+    if attacker.hp == 0 or defender.hp == 0:
+        return 0
     chance = (
             0.25 + copysign(1, attacker.hp - defender.hp) * 0.03 *
             (attacker.hp / defender.hp)
