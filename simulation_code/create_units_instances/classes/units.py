@@ -194,3 +194,14 @@ class Unit:
 
     def start_turn(self):
         self.counterattack_token = True
+
+        # Снимаем все эффекты спадающие в начале хода
+        for_delete = []
+        for i, effect in enumerate(self.effects):
+            if effect.dispell_at_turn_start:
+                for_delete.append(i)
+        for_delete.sort(reverse=True)
+        for x in for_delete:
+            info(f"С {self.name} (цвет {self.color}) спадает эффект "
+                 f"{self.effects[x].name}")
+            del self.effects[x]
