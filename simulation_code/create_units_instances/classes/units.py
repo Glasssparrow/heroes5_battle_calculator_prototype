@@ -2,6 +2,7 @@ from random import choice, uniform, randint, random
 from logging import info
 from math import copysign, ceil
 from .effects import Agility
+from .skills import CounterattackBlocker
 from simulation_code.constants import (
     IMMUNITIES, IMMUNITIES_REVERSE, BATTLE_ABILITIES, TESTING_ABILITIES
 )
@@ -275,3 +276,7 @@ class Unit:
 
     def end_turn(self):
         self.morale_status = 0
+
+    def get_extra_skills(self):
+        if self.blinding_strike:
+            self.skills.append(CounterattackBlocker())

@@ -9,6 +9,7 @@ IMMUNITIES = {
     "weakening_immune": "Иммунитет к ослаблению",
     "machine": "Механизм",
     "undead": "Нежить",
+    "elemental": "Элементаль",
 }
 
 IMMUNITIES_REVERSE = {
@@ -28,12 +29,14 @@ BATTLE_ABILITIES = {
     "chivalry_charge": "Рыцарский разбег",
     "vampire": "Вампиризм",
     "agility": "Ловкость",
+    "blinding_strike": "Ослепляющий удар"
 }
 
 SKILLS = {
     "Оглушение": PeasantBash(),
     "Оглушение щитом": FootmanBash(),
     "Боевое безумие": BattleFrenzy(),
+    "Ослепляющий удар": BlindingStrike(),
 }
 
 TESTING_ABILITIES = {

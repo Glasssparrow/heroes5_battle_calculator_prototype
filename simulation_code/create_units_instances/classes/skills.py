@@ -53,3 +53,35 @@ class BattleFrenzy(Skill):
         super().__init__()
         self.effect = CounterattackDamageMultiplier()
         self.apply_after_counterattack = True
+
+
+class BlindingStrike(Skill):
+
+    def __init__(self):
+        super().__init__()
+        self.effect = Blind()
+        self.apply_before_attack = True
+        self.target = "enemy"
+
+    def did_worked(self, base_chance=1, skill_range=100):
+        dice = random()
+        if dice < base_chance:
+            return True
+        else:
+            return False
+
+
+class CounterattackBlocker(Skill):
+
+    def __init__(self):
+        super().__init__()
+        self.effect = BlockCounterattack()
+        self.apply_before_attack = True
+        self.target = "enemy"
+
+    def did_worked(self, base_chance=1, skill_range=100):
+        dice = random()
+        if dice < base_chance:
+            return True
+        else:
+            return False

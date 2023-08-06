@@ -25,6 +25,7 @@ class Effect:
         self.dispell_by_timer = False
 
         self.cannot_counterattack = False
+        self.cannot_act = False
 
         self.bash = False
 
@@ -75,3 +76,29 @@ class Agility(Effect):
         self.defence_flat = moved * 2
         self.can_be_dispelled_by_enemy = True
         self.dispell_at_turn_start = False
+
+
+class BlockCounterattack(Effect):
+
+    def __init__(self):
+        super().__init__()
+        self.name = "block_counterattack"
+        self.buff = "debuff"
+        self.check_immune = []
+
+        self.dispell_after_counterattack = True
+        self.cannot_counterattack = True
+
+
+class Blind(Effect):
+
+    def __init__(self):
+        super().__init__()
+        self.name = "blind"
+        self.buff = "debuff"
+        self.check_immune = ["undead", "elemental", "machine"]
+
+        self.timer = 10
+        self.cannot_act = True
+        self.cannot_counterattack = True
+        self.dispell_by_timer = True

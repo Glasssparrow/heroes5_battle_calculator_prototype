@@ -36,3 +36,5 @@ def add_unit_abilities_from_data(data, unit):
     for word_from_data, instance_of_skill in TESTING_SKILLS.items():
         if word_from_data in abilities_list:
             unit.skills.append(instance_of_skill)
+
+    unit.get_extra_skills()

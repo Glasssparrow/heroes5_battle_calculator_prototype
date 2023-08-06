@@ -7,6 +7,16 @@ from simulation_code.visualisation.get_grid import get_grid
 from simulation_code.melee_fight.melee import melee_fight
 
 
+def can_act(unit):
+    result = True
+    if unit.morale_status < 0:
+        return False
+    for effect in unit.effects:
+        if effect.cannot_act:
+            result = False
+    return result
+
+
 def battle(unit1, unit2):
 
     unit1.color, unit2.color = "Красный", "Синий"
@@ -40,7 +50,7 @@ def battle(unit1, unit2):
         )
         active.start_turn()
 
-        if active.morale_status >= 0:
+        if can_act(active):
             move_to, action, movement_type = choose_action(active, passive)
 
             if move_to[0] == active.position[0] and move_to[1] == active.position[1]:
