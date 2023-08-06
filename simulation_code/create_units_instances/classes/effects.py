@@ -71,6 +71,7 @@ class Agility(Effect):
 
     def __init__(self, moved):
         super().__init__()
+        self.name = "agility"
         self.defence_flat = moved * 2
         self.can_be_dispelled_by_enemy = True
         self.dispell_at_turn_start = False
