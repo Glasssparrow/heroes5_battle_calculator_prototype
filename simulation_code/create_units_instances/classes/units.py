@@ -111,8 +111,6 @@ class Unit:
             self.__dict__[ability] = False
 
     def apply_effect(self, new_effect):
-        info(f"На {self.name} (цвет {self.color}) "
-             f"наложен эффект {new_effect.name}")
         effect_not_in_effects = True
         number_of_effect = 0
         for x in range(len(self.effects)):
@@ -120,8 +118,12 @@ class Unit:
                 effect_not_in_effects = False
                 number_of_effect = x
         if effect_not_in_effects:
+            info(f"На {self.name} (цвет {self.color}) "
+                 f"наложен эффект {new_effect.name}")
             self.effects.append(new_effect)
         else:
+            info(f"На {self.name} (цвет {self.color}) "
+                 f"обновлен эффект {new_effect.name}")
             self.effects[number_of_effect].reapply(new_effect)
 
     def wheel_of_fate(self):
