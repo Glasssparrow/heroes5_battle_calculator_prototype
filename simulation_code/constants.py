@@ -21,6 +21,7 @@ BATTLE_ABILITIES = {
     "double_attack": "Двойной удар",
     "double_attack_if_kill": "Колун",
     "assault": "Штурм",
+    "forbid_counterattack": "Враг не отвечает",
     "infinite_counterattack": "Бесконечный отпор",
     "dispell_strike": "Очищение",
     "chivalry_charge": "Рыцарский разбег",

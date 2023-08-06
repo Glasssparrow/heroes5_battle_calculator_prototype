@@ -20,6 +20,8 @@ def strike(attacker, defender):
 
 def can_counter(attacker, target):
     can_attack = True
+    if target.forbid_counterattack:
+        return False
     if not attacker.counterattack_token:
         return False
     for effect in attacker.effects:
