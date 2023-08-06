@@ -157,6 +157,17 @@ class Unit:
             f"существ (hp={self.soldier_hp}/{self.health}).")
         return amount_of_damage, quantity_before - self.quantity
 
+    def restore_hp(self, healing):
+        quantity_before = self.quantity
+        self.hp += healing
+        hp_restored = healing
+        if self.hp > self.max_hp:
+            hp_restored -= self.hp - self.max_hp
+            self.hp = self.max_hp
+        self.quantity = ceil(self.hp/self.health)
+        info(f"{self.name} (цвет {self.color}) восстанавливает {hp_restored} "
+             f"здоровья. Возрождено {self.quantity-quantity_before} существ.")
+
     @property
     def soldier_hp(self):
         return int(self.hp - ((self.quantity-1) * self.health))

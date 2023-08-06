@@ -3,11 +3,14 @@ from .effects.apply import apply_effects_before_attack, base_chance
 from .effects.dispell import dispell_after_counterattack
 from random import random
 from logging import info
+from math import ceil
 
 
 def strike(attacker, defender):
     attack, damage = get_attack_properties(attacker, "melee")
     damage_taken, soldiers_died = defender.take_damage(attack, damage)
+    if attacker.vampire:
+        attacker.restore_hp(ceil(damage_taken/2))
     return damage_taken, soldiers_died
 
 
