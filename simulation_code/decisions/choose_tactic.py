@@ -10,5 +10,7 @@ def choose_tactic(unit1, unit2):
 
     unit1.tactic = "berserk"
     logging.info(f"{unit1.name} (цвет {unit1.color}) решает действовать бездумно!")
-    unit2.tactic = "dummy"
-    logging.info(f"{unit2.name} (цвет {unit2.color}) стоять и ничего не делать!")
+    unit2.tactic = "berserk"
+    logging.info(f"{unit2.name} (цвет {unit2.color}) решает действовать бездумно!")
+    # unit2.tactic = "dummy"
+    # logging.info(f"{unit2.name} (цвет {unit2.color}) стоять и ничего не делать!")
