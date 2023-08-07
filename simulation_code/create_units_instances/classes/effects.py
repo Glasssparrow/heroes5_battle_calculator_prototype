@@ -117,4 +117,4 @@ class Fear(Effect):
         self.dispell_after_counterattack = True
         self.cannot_counterattack = True
         self.check_immune = ["control_immune"]
-        self.fear = False
+        self.fear = True
