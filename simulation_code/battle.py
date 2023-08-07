@@ -65,7 +65,10 @@ def battle(unit1, unit2):
             move(active, passive, move_to, movement_type)
 
             if action == "strike":
-                melee_fight(active, passive)
+                move_to, action = melee_fight(active, passive)
+                move(active=passive, passive=active,
+                     move_to=move_to, movement_type="move_and_stay")
+                # Выстрел если действие выстрел
         if active.morale_status != 0:
             active.initiative_position = 0.5
 

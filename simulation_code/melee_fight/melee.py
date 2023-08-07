@@ -6,6 +6,7 @@ from .effects.dispell import dispell_after_counterattack, dispell_by_attack
 from random import random
 from logging import info
 from math import ceil
+from simulation_code.decisions.run_away import run_away
 
 
 def strike(attacker, defender):
@@ -30,6 +31,14 @@ def can_counter(attacker, target):
     return can_attack
 
 
+def is_intimidated(unit):
+    intimidated = False
+    for effect in unit.effects:
+        if effect.fear:
+            return True
+    return intimidated
+
+
 def melee_fight(attacker, defender):
 
     dispell_by_attack(defender)
@@ -43,7 +52,10 @@ def melee_fight(attacker, defender):
         defender.lose_counterattack_token()
         apply_effects_after_counterattack(attacker=defender, target=attacker)
 
+    will_run_away = is_intimidated(defender)
     dispell_after_counterattack(defender)
+    if will_run_away:
+        return run_away(defender, attacker, "wait")
 
     if (
         attacker.double_attack or
@@ -62,3 +74,4 @@ def melee_fight(attacker, defender):
             apply_effects_after_counterattack(attacker=defender, target=attacker)
 
         dispell_after_counterattack(defender)
+    return defender.position, "wait"

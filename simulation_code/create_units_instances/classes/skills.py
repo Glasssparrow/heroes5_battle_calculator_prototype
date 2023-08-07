@@ -9,7 +9,6 @@ class Skill:
         self.skill_range = 100
         self.apply_before_attack = False
         self.apply_after_counterattack = False
-        self.check_immune = []
         self.target = "self"
 
     @staticmethod
@@ -81,6 +80,23 @@ class CounterattackBlocker(Skill):
 
     def did_worked(self, base_chance=1, skill_range=100):
         dice = random()
+        if dice < base_chance:
+            return True
+        else:
+            return False
+
+
+class Intimidation(Skill):
+
+    def __init__(self):
+        super().__init__()
+        self.effect = Fear()
+        self.apply_before_attack = True
+        self.target = "enemy"
+
+    def did_worked(self, base_chance=1, skill_range=100):
+        dice = random()
+        chance = 1 - (1 - base_chance) ** 0.8
         if dice < base_chance:
             return True
         else:

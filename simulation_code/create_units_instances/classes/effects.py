@@ -27,6 +27,7 @@ class Effect:
 
         self.cannot_counterattack = False
         self.cannot_act = False
+        self.fear = False
 
         self.bash = False
 
@@ -105,3 +106,15 @@ class Blind(Effect):
 
         self.dispell_by_timer = True
         self.dispell_by_attack = True
+
+
+class Fear(Effect):
+
+    def __init__(self):
+        super().__init__()
+        self.name = "fear"
+        self.buff = "debuff"
+        self.dispell_after_counterattack = True
+        self.cannot_counterattack = True
+        self.check_immune = ["control_immune"]
+        self.fear = False

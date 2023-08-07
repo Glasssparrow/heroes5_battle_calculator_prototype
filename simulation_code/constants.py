@@ -37,6 +37,7 @@ SKILLS = {
     "Оглушение щитом": FootmanBash(),
     "Боевое безумие": BattleFrenzy(),
     "Ослепляющий удар": BlindingStrike(),
+    "Атака страхом": Intimidation(),
 }
 
 TESTING_ABILITIES = {
