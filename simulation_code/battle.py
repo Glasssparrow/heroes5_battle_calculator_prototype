@@ -78,12 +78,12 @@ def battle(unit1, unit2):
         for row in range(10):
             logging.info(f"{grid_before[row]}     {grid_after[row]}")
 
-        if unit1.hp == 0 or unit2.hp == 0:
+        if unit2.hp == 0:
             logging.info(
                 f"{unit1.name} (цвет {unit1.color}) побеждает!"
             )
             break
-        elif unit2.hp == 0:
+        elif unit1.hp == 0:
             logging.info(
                 f"{unit2.name} (цвет {unit2.color}) побеждает!"
             )
