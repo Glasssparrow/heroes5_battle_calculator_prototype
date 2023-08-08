@@ -32,6 +32,11 @@ async def on_ready():
 
 
 @bot.command()
+async def get_database(ctx):
+    await ctx.send(file=discord.File("database/test_database.xlsx"))
+
+
+@bot.command()
 async def test(ctx, unit1, unit2, quantity1, quantity2, type_of_quantity):
     try:
         test_battle(
@@ -53,6 +58,8 @@ async def help(ctx):
         '"Количество первых существ" "Количество вторых существ" "Тип количества"\n'
         'Типы количества: "Количество", "Золото", "Прирост"\n'
         'Получить список фракций "!factions"\n'
+        'Получить список существ фракции "!faction Название"\n'
+        'Получить базу данных "!get_database"\n'
         'Добавить своё существо \n'
         '!add "Название" "Атака" "Защита" "Мин урон" "Макс урон" "Здоровье"'
         '"Инициатива" "Скорость" "Выстрелы" "Мана" "Цена" "Опыт" "Прирост"'
