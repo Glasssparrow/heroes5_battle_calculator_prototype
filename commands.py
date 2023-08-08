@@ -1,5 +1,16 @@
 
 
+def get_factions(data):
+    factions_list = []
+    for index in data.index:
+        if data.loc[index, "Фракция"] not in factions_list:
+            factions_list.append(data.loc[index, "Фракция"])
+    factions = ""
+    for element in factions_list:
+        factions = f"{factions}, {element}"
+    return factions_list
+
+
 def stats_of_unit(data, unit_name):
     if unit_name not in data.index:
         result = "Что-то пошло не так =\\"

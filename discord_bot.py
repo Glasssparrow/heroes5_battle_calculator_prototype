@@ -9,6 +9,7 @@ from commands import *
 
 HELLO = ["hello"]
 DATABASE = None
+FACTIONS = None
 
 bot = commands.Bot(
     command_prefix="!",
@@ -20,7 +21,9 @@ bot = commands.Bot(
 @bot.event
 async def on_ready():
     global DATABASE
+    global FACTIONS
     DATABASE = read_database(ALL_DATABASES)
+    FACTIONS = get_factions(DATABASE)
     print(f"Bot {bot.user} is ready to work.")
 
 
@@ -55,11 +58,7 @@ async def stats(ctx, name):
 
 @bot.command()
 async def factions(ctx):
-    await ctx.send(
-        "!humans - Орден порядка\n"
-        "!forest_elfs - Лесной союз\n"
-        "!mages - Академия волшебства"
-    )
+    await ctx.send(FACTIONS)
 
 
 @bot.command()
