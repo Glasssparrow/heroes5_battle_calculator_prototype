@@ -2,9 +2,13 @@ import discord
 from discord.ext import commands
 from test import test_battle
 from for_discord_bot import TOKEN
+from get_data.read_database import read_database
+from constants import ALL_DATABASES
+from commands import *
 
 
 HELLO = ["hello"]
+DATABASE = None
 
 bot = commands.Bot(
     command_prefix="!",
@@ -15,6 +19,8 @@ bot = commands.Bot(
 
 @bot.event
 async def on_ready():
+    global DATABASE
+    DATABASE = read_database(ALL_DATABASES)
     print(f"Bot {bot.user} is ready to work.")
 
 
@@ -37,6 +43,13 @@ async def help(ctx):
         'Получить список фракций "!factions"\n'
         'Пример команды "!test":\n'
         '!test Крестьянин Ополченец 25 17 Количество'
+    )
+
+
+@bot.command()
+async def stats(ctx, name):
+    await ctx.send(
+        stats_of_unit(DATABASE, name)
     )
 
 

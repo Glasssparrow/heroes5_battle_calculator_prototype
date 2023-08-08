@@ -1,8 +1,9 @@
 from simulation_code.main import test_battle
 from get_data.read_database import read_database
+from constants import ALL_DATABASES
 
 
-data = read_database(["test_database"])
+data = read_database(ALL_DATABASES)
 
 test_battle(
     data=data,
