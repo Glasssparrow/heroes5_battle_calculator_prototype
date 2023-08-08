@@ -10,6 +10,7 @@ from commands import *
 HELLO = ["hello"]
 DATABASE = None
 FACTIONS = None
+FACTIONS_DICT = {}
 
 bot = commands.Bot(
     command_prefix="!",
@@ -22,8 +23,9 @@ bot = commands.Bot(
 async def on_ready():
     global DATABASE
     global FACTIONS
+    global FACTIONS_DICT
     DATABASE = read_database(ALL_DATABASES)
-    FACTIONS = get_factions(DATABASE)
+    FACTIONS, FACTIONS_DICT = get_factions(DATABASE)
     print(f"Bot {bot.user} is ready to work.")
 
 
@@ -62,87 +64,8 @@ async def factions(ctx):
 
 
 @bot.command()
-async def humans(ctx):
+async def faction(ctx, faction_name):
 
-    await ctx.send(
-        "Крестьянин\n"
-        "Ополченец\n"
-        "Лендлорд\n"
-        "Лучник\n"
-        "Арбалетчик\n"
-        "Стрелок\n"
-        "Мечник\n"
-        "Латник\n"
-        "Ревнитель веры\n"
-        "Грифон\n"
-        "Королевский грифон\n"
-        "Боевой грифон\n"
-        "Монах\n"
-        "Инквизитор\n"
-        "Адепт\n"
-        "Рыцарь\n"
-        "Паладин\n"
-        "Рыцарь изабель\n"
-        "Ангел\n"
-        "Архангел\n"
-        "Серафим"
-    )
-
-
-@bot.command()
-async def forest_elfs(ctx):
-
-    await ctx.send(
-        "Существо\n"
-        "Фея\n"
-        "Дриада\n"
-        "Нимфа\n"
-        "Танцующий с клинками\n"
-        "Танцующий со смертью\n"
-        "Танцующий с ветром\n"
-        "Эльфийский лучний\n"
-        "Мастер лука\n"
-        "Лесной стрелок\n"
-        "Друид\n"
-        "Верховный друид\n"
-        "Старший друид\n"
-        "Единорог\n"
-        "Боевой единорог\n"
-        "Светлый единорог\n"
-        "Энт\n"
-        "Древний энт\n"
-        "Дикий энт\n"
-        "Зеленый дракон\n"
-        "Изумрудный дракон\n"
-        "Кристаллический дракон\n"
-    )
-
-
-@bot.command()
-async def mages(ctx):
-
-    await ctx.send(
-        "Гремлин\n"
-        "Старший гремлин\n"
-        "Гремлин-вредитель\n"
-        "Каменная горгулья\n"
-        "Обсидиановая горгулья\n"
-        "Стихийная горгулья\n"
-        "Железный голем\n"
-        "Стальной голем\n"
-        "Обсидиановый голем\n"
-        "Маг\n"
-        "Архимаг\n"
-        "Боевой маг\n"
-        "Джинн\n"
-        "Султан джиннов\n"
-        "Визирь джиннов\n"
-        "Принцесса-ракшас\n"
-        "Ракшас-раджа\n"
-        "Кшатрий-ракшас\n"
-        "Колосс\n"
-        "Титан\n"
-        "Громовержец\n"
-    )
+    await ctx.send(FACTIONS_DICT[faction_name])
 
 bot.run(TOKEN)

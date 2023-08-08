@@ -2,13 +2,14 @@
 
 def get_factions(data):
     factions_list = []
+    factions_dict = {}
     for index in data.index:
-        if data.loc[index, "Фракция"] not in factions_list:
-            factions_list.append(data.loc[index, "Фракция"])
-    factions = ""
-    for element in factions_list:
-        factions = f"{factions}, {element}"
-    return factions_list
+        faction = data.loc[index, "Фракция"]
+        if faction not in factions_list:
+            factions_list.append(faction)
+            factions_dict[faction] = []
+        factions_dict[faction].append(index)
+    return factions_list, factions_dict
 
 
 def stats_of_unit(data, unit_name):
