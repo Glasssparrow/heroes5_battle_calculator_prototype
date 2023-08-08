@@ -1,8 +1,8 @@
 from simulation_code.main import test_battle
-from get_data.get_data import get_data
+from get_data.read_database import read_database
 
 
-data = get_data()
+data = read_database(["test_database"])
 
 test_battle(
     data=data,
