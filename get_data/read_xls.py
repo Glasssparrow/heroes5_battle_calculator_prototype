@@ -15,6 +15,8 @@ def read_xls(database_name, data=None):
     meta = read_table(path, METADATA_SHEET_NAME, METADATA_COLUMN_NAME)
     if data is None:
         data = DataFrame()
+    elif not isinstance(data, DataFrame):
+        data = DataFrame()
     data_dict = {}
     for table_list in meta.index:
         data_dict[table_list] = read_table(path,

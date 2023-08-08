@@ -1,7 +1,9 @@
 from pandas import DataFrame
 from .read_xls import read_xls
+from simulation_code.test_time import test_time
 
 
+@test_time
 def read_database(databases_list):
 
     data = DataFrame()
