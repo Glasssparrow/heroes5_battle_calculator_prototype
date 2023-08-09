@@ -12,7 +12,7 @@ class Skill:
         self.target = "self"
 
     @staticmethod
-    def did_worked(base_chance=1, skill_range=100):
+    def did_worked(base_chance=1, skill_range=100, is_adjacent=False, ):
         return True
 
     def return_effect(self):
@@ -27,7 +27,7 @@ class PeasantBash(Skill):
         self.apply_before_attack = True
         self.target = "enemy"
 
-    def did_worked(self, base_chance=1, skill_range=100):
+    def did_worked(self, base_chance=1, skill_range=100, is_adjacent=False):
         dice = random()
         if dice < base_chance:
             return True
@@ -37,7 +37,7 @@ class PeasantBash(Skill):
 
 class FootmanBash(PeasantBash):
 
-    def did_worked(self, base_chance=1, skill_range=100):
+    def did_worked(self, base_chance=1, skill_range=100, is_adjacent=False):
         dice = random()
         chance = 1 - (1 - base_chance) ** 1.5
         if dice < base_chance:
@@ -62,7 +62,7 @@ class BlindingStrike(Skill):
         self.apply_before_attack = True
         self.target = "enemy"
 
-    def did_worked(self, base_chance=1, skill_range=100):
+    def did_worked(self, base_chance=1, skill_range=100, is_adjacent=False):
         dice = random()
         if dice < base_chance:
             return True
@@ -78,7 +78,7 @@ class CounterattackBlocker(Skill):
         self.apply_before_attack = True
         self.target = "enemy"
 
-    def did_worked(self, base_chance=1, skill_range=100):
+    def did_worked(self, base_chance=1, skill_range=100, is_adjacent=False):
         dice = random()
         if dice < base_chance:
             return True
@@ -94,7 +94,7 @@ class Intimidation(Skill):
         self.apply_before_attack = True
         self.target = "enemy"
 
-    def did_worked(self, base_chance=1, skill_range=100):
+    def did_worked(self, base_chance=1, skill_range=100, is_adjacent=False):
         dice = random()
         chance = 1 - (1 - base_chance) ** 0.8
         if dice < base_chance:
