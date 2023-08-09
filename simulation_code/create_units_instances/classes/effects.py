@@ -118,3 +118,13 @@ class Fear(Effect):
         self.cannot_counterattack = True
         self.check_immune = ["control_immune"]
         self.fear = True
+
+
+class DecreaseMorale3(Effect):
+
+    def __init__(self):
+        super().__init__()
+        self.name = "morale -3"
+        self.buff = "debuff"
+        self.morale = -3
+        self.dispell_at_turn_start = True
