@@ -153,4 +153,18 @@ async def add(
         await ctx.send(f"Существо {name} добавлено.")
 
 
+@bot.command()
+async def battle(ctx, unit1, unit2, quantity1, quantity2, type_of_quantity):
+    try:
+        result = test_battle(
+            data=database,
+            unit1_name=unit1, unit2_name=unit2, number_of_battles=100,
+            quantity_type=type_of_quantity,
+            quantity1=int(quantity1), quantity2=int(quantity2))
+        await ctx.send(result)
+    except Exception:
+        await ctx.send("Что то пошло не так =\\")
+        raise
+
+
 bot.run(TOKEN)
