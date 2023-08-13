@@ -28,9 +28,24 @@ def test_battle(
         else:
             unit1.color = "Синий"
 
-    x = 0
-    logging.basicConfig(level=logging.INFO,
-                        filename=f"log/battle{x}.log",
-                        filemode="w", force=True)
+    unit1.victory_chance = 0
+    unit2.victory_chance = 0
+    for x in range(number_of_battles):
+        logging.basicConfig(level=logging.INFO,
+                            filename=f"log/battle{x}.log",
+                            filemode="w", force=True)
 
-    battle(unit1, unit2)
+        unit1.hp = unit1.max_hp
+        unit2.hp = unit2.max_hp
+        winners_color = battle(unit1, unit2)
+        if winners_color == unit1.color:
+            unit1.victory_chance += 1/number_of_battles
+        else:
+            unit2.victory_chance += 1/number_of_battles
+
+    result = f"Шансы на на победу {unit1.name} (цвет {unit1.color}) " \
+             f"{round(unit1.victory_chance * 100, 0)}%\n" \
+             f"Шансы на на победу {unit2.name} (цвет {unit2.color}) " \
+             f"{round(unit2.victory_chance * 100, 0)}%\n"
+
+    return result

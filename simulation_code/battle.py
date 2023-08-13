@@ -82,9 +82,14 @@ def battle(unit1, unit2):
             logging.info(
                 f"{unit1.name} (цвет {unit1.color}) побеждает!"
             )
-            break
+            return unit1.color
         elif unit1.hp == 0:
             logging.info(
                 f"{unit2.name} (цвет {unit2.color}) побеждает!"
             )
-            break
+            return unit2.color
+
+    if unit1.hp / unit1.max_hp < unit2.hp / unit2.max_hp:
+        return unit2.color
+    else:
+        return unit1.color
