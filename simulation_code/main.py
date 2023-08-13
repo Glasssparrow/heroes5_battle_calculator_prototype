@@ -23,7 +23,10 @@ def test_battle(
 
     # Проверяем что цвета у юнитов разные
     if unit1.color == unit2.color:
-        unit1.color = "Бесцветный"
+        if unit1.color == "Синий":
+            unit1.color = "Бесцветный"
+        else:
+            unit1.color = "Синий"
 
     x = 0
     logging.basicConfig(level=logging.INFO,

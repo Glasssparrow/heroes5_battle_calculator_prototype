@@ -104,10 +104,7 @@ class Unit:
         self.name = name
         self.initiative_position = uniform(0, 0.25)
         self.counterattack_token = True
-        self.color = choice(
-            ["Красный", "Оранжевый", "Желтый", "Зеленый",
-             "Голубой", "Синий", "Фиолетовый"]
-        )
+        self.color = "Красный"
         self.effects = []
         self.skills = []
 
