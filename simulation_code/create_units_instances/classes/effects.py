@@ -20,6 +20,8 @@ class Effect:
         self.check_immune = []
         self.can_be_dispelled_by_enemy = False
 
+        self.aura = False
+
         self.dispell_at_turn_start = False
         self.dispell_after_counterattack = False
         self.dispell_by_attack = False
@@ -127,4 +129,4 @@ class DecreaseMorale3(Effect):
         self.name = "morale -3"
         self.buff = "debuff"
         self.morale = -3
-        self.dispell_at_turn_start = True
+        self.aura = True
