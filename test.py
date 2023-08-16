@@ -7,9 +7,9 @@ data = read_database(ALL_DATABASES)
 
 result = test_battle(
     data=data,
-    unit1_name="Кошмар", unit2_name="Ополченец",
-    number_of_battles=100, quantity_type="Количество",
-    quantity1=100, quantity2=1000
+    unit1_name="Крестьянин", unit2_name="Крестьянин",
+    number_of_battles=1000, quantity_type="Количество",
+    quantity1=100, quantity2=100
 )
 
 print(result)
