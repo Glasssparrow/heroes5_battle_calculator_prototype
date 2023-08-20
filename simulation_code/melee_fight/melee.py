@@ -7,9 +7,11 @@ from random import random
 from logging import info
 from math import ceil
 from simulation_code.decisions.run_away import run_away
+from .effects.apply_and_dispell import apply_auras
 
 
 def strike(attacker, defender):
+    apply_auras(attacker, defender)
     attack, damage = get_attack_properties(attacker, "melee")
     damage_taken, soldiers_died = defender.take_damage(attack, damage)
     if attacker.dispell_strike:
