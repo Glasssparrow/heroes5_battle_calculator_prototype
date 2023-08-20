@@ -9,6 +9,7 @@ class Skill:
         self.skill_range = 100
         self.apply_before_attack = False
         self.apply_after_counterattack = False
+        self.aura = False
         self.target = "self"
 
     @staticmethod
@@ -101,3 +102,12 @@ class Intimidation(Skill):
             return True
         else:
             return False
+
+
+class FearAura(Skill):
+
+    def __init__(self):
+        super().__init__()
+        self.effect = DecreaseMorale3()
+        self.aura = True
+        self.target = "enemy"
